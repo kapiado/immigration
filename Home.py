@@ -6,10 +6,11 @@ Created on Wed Apr 19 16:46:34 2023
 """
 
 import streamlit as st
-import numpy as np
+import streamlit.components.v1 as components
+# import numpy as np
 import pandas as pd
-import plotly.express as px          # Plotly
-import plotly.graph_objects as go
+# import plotly.express as px          # Plotly
+# import plotly.graph_objects as go
 from PIL import Image
 
 st.set_page_config(
@@ -28,33 +29,43 @@ st.image(image,caption='Figure 1: Green Card Resident Image (Amazon)')
 df = pd.read_csv("PERM_Data_5_22_23.csv")
 
 # Cases received vs. Years
+# def cases(dataframe):
+#     #uniqueyears = df["CASE_RECEIVED_YEAR"].unique() # Obtain years for x-axis
+#     #years = list(uniqueyears) # Put into list
+#     numcases= df["CASE_RECEIVED_YEAR"].value_counts().sort_index() # Number of cases per year
+#     fig = px.bar(x = numcases.index, y = numcases, title='Cases Received from 2006-2021',height=500,color=numcases)
+#     fig.update_xaxes(title='Year',type='category')
+#     fig.update_yaxes(title='Total Received',type='linear')
+#     st.plotly_chart(fig)
+
 def cases(dataframe):
-    #uniqueyears = df["CASE_RECEIVED_YEAR"].unique() # Obtain years for x-axis
-    #years = list(uniqueyears) # Put into list
-    numcases= df["CASE_RECEIVED_YEAR"].value_counts().sort_index() # Number of cases per year
-    fig = px.bar(x = numcases.index, y = numcases, title='Cases Received from 2006-2021',height=500,color=numcases)
-    fig.update_xaxes(title='Year',type='category')
-    fig.update_yaxes(title='Total Received',type='linear')
-    st.plotly_chart(fig)
+    HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read() 
+    print(source_code)
+    components.html(source_code,height=600)
     
 def avgwait(dataframe):
     # Convert to datetime format for subtraction
-    df["DECISION_DATE"] = pd.to_datetime(df["DECISION_DATE"])
-    df["CASE_RECEIVED_DATE"] = pd.to_datetime(df["CASE_RECEIVED_DATE"])
-    # Create new column for waiting time
-    df["WAITING_TIME"] = df["DECISION_DATE"]-df["CASE_RECEIVED_DATE"]
-    # Convert column to string and remove days and timestamp
-    waitstr = df["WAITING_TIME"].astype(str).str.replace('days.+','')
-    # Create a new column to get only days
-    df["WAITING_TIME_DAYS"] = waitstr
-    # Make column int
-    df["WAITING_TIME_DAYS"] = df["WAITING_TIME_DAYS"].astype(int)
-    average_waiting_time = df.groupby('CASE_RECEIVED_YEAR')['WAITING_TIME_DAYS'].mean()
-    numcases= df["CASE_RECEIVED_YEAR"].value_counts().sort_index() # Number of cases per year
-    fig = px.bar(x = numcases.index, y = average_waiting_time, title='Average Waiting Time from 2006-2021',height=500,color=average_waiting_time)
-    fig.update_xaxes(title='Year',type='category')
-    fig.update_yaxes(title='Average Waiting Time (days)',type='linear')
-    st.plotly_chart(fig)
+    # df["DECISION_DATE"] = pd.to_datetime(df["DECISION_DATE"])
+    # df["CASE_RECEIVED_DATE"] = pd.to_datetime(df["CASE_RECEIVED_DATE"])
+    # # Create new column for waiting time
+    # df["WAITING_TIME"] = df["DECISION_DATE"]-df["CASE_RECEIVED_DATE"]
+    # # Convert column to string and remove days and timestamp
+    # waitstr = df["WAITING_TIME"].astype(str).str.replace('days.+','')
+    # # Create a new column to get only days
+    # df["WAITING_TIME_DAYS"] = waitstr
+    # # Make column int
+    # df["WAITING_TIME_DAYS"] = df["WAITING_TIME_DAYS"].astype(int)
+    # average_waiting_time = df.groupby('CASE_RECEIVED_YEAR')['WAITING_TIME_DAYS'].mean()
+    # numcases= df["CASE_RECEIVED_YEAR"].value_counts().sort_index() # Number of cases per year
+    # fig = px.bar(x = numcases.index, y = average_waiting_time, title='Average Waiting Time from 2006-2021',height=500,color=average_waiting_time)
+    # fig.update_xaxes(title='Year',type='category')
+    # fig.update_yaxes(title='Average Waiting Time (days)',type='linear')
+    # st.plotly_chart(fig)
+    HtmlFile = open("AvgWaitingTime.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read() 
+    print(source_code)
+    components.html(source_code,height=600)
     
 st.header('Background')
 cases(df)

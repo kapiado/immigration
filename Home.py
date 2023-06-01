@@ -31,8 +31,6 @@ elif button2:
     st.open("Overview.py")
 elif button3:
     st.open("Profiles.py")
-else
-return
 
 st.write("# Analysis of Factors Affecting U.S. Permanent Residency Using Data and Predictive Analytics")
 image = Image.open('green card.jfif')

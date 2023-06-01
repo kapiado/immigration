@@ -26,7 +26,7 @@ st.image(image,caption='Figure 1: Green Card Resident Image (Amazon)')
 
 
 
-df = pd.read_csv("PERM_Data_5_22_23.csv")
+# df = pd.read_csv("PERM_Data_5_22_23.csv")
 
 # Cases received vs. Years
 # def cases(dataframe):

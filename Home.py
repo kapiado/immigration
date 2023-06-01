@@ -26,11 +26,11 @@ button2 = sideb.button("Overview")
 button3 = sideb.button("Profiles")
 
 if button1:
-    st.open("Home.py")
+    Home.py
 elif button2:
-    st.open("Overview.py")
+    Overview.py
 elif button3:
-    st.open("Profiles.py")
+    Profiles.py
 
 st.write("# Analysis of Factors Affecting U.S. Permanent Residency Using Data and Predictive Analytics")
 image = Image.open('green card.jfif')

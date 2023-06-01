@@ -38,13 +38,13 @@ st.image(image,caption='Figure 1: Green Card Resident Image (Amazon)')
 #     fig.update_yaxes(title='Total Received',type='linear')
 #     st.plotly_chart(fig)
 
-def cases(dataframe):
+def cases:
     HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read() 
     print(source_code)
     components.html(source_code,height=600)
     
-def avgwait(dataframe):
+def avgwait:
     # Convert to datetime format for subtraction
     # df["DECISION_DATE"] = pd.to_datetime(df["DECISION_DATE"])
     # df["CASE_RECEIVED_DATE"] = pd.to_datetime(df["CASE_RECEIVED_DATE"])
@@ -68,8 +68,8 @@ def avgwait(dataframe):
     components.html(source_code,height=600)
     
 st.header('Background')
-cases(df)
-avgwait(df)
+cases
+avgwait
 c = st.empty()
 c.write('The immigration backlog is a result of the accumulation of immigration applications that have not been processed within a reasonable timeframe. \nIt is caused by increased demand, insufficient resources, complex procedures, and policy changes. Backlogs lead to delays in family reunification, economic impact, strain on resources, and uncertainty for individuals. In this dashboard, we aim to achieve transparency for individuals that are in the middle of the process and want to begin the process for residency. We will be  looking at historical data and factors that influence the wait times in this process, and provide an interface where users can predict their personal waiting time based on their demographics.')
 

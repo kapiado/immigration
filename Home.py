@@ -28,9 +28,9 @@ button3 = sideb.button("Profiles")
 if button1:
     Home.py
 elif button2:
-    Overview.py
+    Pages/Overview.py
 elif button3:
-    Profiles.py
+    Pages/Profiles.py
 
 st.write("# Analysis of Factors Affecting U.S. Permanent Residency Using Data and Predictive Analytics")
 image = Image.open('green card.jfif')

@@ -17,7 +17,7 @@ st.set_page_config(
     page_title="Home",
     page_icon="👋",
 )
-
+st.sidebar.success("Select a page above.")
 st.write("# Analysis of Factors Affecting U.S. Permanent Residency Using Data and Predictive Analytics")
 image = Image.open('green card.jfif')
 

@@ -4,7 +4,12 @@ Created on Wed May 31 18:26:27 2023
 
 @author: katri
 """
-
+markdown = """
+Web App URL: <https://kapiado-immigration-home-p9sni2.streamlit.app/>
+GitHub Repository: <https://github.com/kapiado/immigration>
+"""
+st.sidebar.title("About")
+st.sidebar.info(markdown)
 import streamlit as st
 import streamlit.components.v1 as components
 

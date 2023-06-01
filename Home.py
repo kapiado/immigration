@@ -68,8 +68,8 @@ def avgwait(dataframe):
     components.html(source_code,height=600)
     
 st.header('Background')
-cases(dataframe)
-avgwait(dataframe)
+cases(df)
+avgwait(df)
 c = st.empty()
 c.write('The immigration backlog is a result of the accumulation of immigration applications that have not been processed within a reasonable timeframe. \nIt is caused by increased demand, insufficient resources, complex procedures, and policy changes. Backlogs lead to delays in family reunification, economic impact, strain on resources, and uncertainty for individuals. In this dashboard, we aim to achieve transparency for individuals that are in the middle of the process and want to begin the process for residency. We will be  looking at historical data and factors that influence the wait times in this process, and provide an interface where users can predict their personal waiting time based on their demographics.')
 

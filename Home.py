@@ -38,13 +38,13 @@ st.image(image,caption='Figure 1: Green Card Resident Image (Amazon)')
 #     fig.update_yaxes(title='Total Received',type='linear')
 #     st.plotly_chart(fig)
 
-def cases:
+def cases():
     HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read() 
     print(source_code)
     components.html(source_code,height=600)
     
-def avgwait:
+def avgwait():
     # Convert to datetime format for subtraction
     # df["DECISION_DATE"] = pd.to_datetime(df["DECISION_DATE"])
     # df["CASE_RECEIVED_DATE"] = pd.to_datetime(df["CASE_RECEIVED_DATE"])

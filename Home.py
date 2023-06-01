@@ -26,11 +26,11 @@ button2 = sideb.button("Overview")
 button3 = sideb.button("Profiles")
 
 if button1:
-    Home.py
+    streamlit run Home.py
 elif button2:
-    Pages/Overview.py
+    streamlit run Overview.py
 elif button3:
-    Pages/Profiles.py
+    streamlit run Profiles.py
 
 st.write("# Analysis of Factors Affecting U.S. Permanent Residency Using Data and Predictive Analytics")
 image = Image.open('green card.jfif')

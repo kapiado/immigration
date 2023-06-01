@@ -17,8 +17,22 @@ st.set_page_config(
     page_title="Home",
     page_icon="👋",
 )
-st.sidebar.success("Select a page above.")
-st.sidebar.title("Home")
+#st.sidebar.success("Select a page above.")
+#st.sidebar.title("Home")
+
+sideb = st.sidebar
+button1 = sideb.button("Home")
+button2 = sideb.button("Overview")
+button3 = sideb.button("Profiles")
+
+if button1:
+    st.open("Home.py")
+elif button2:
+    st.open("Overview.py")
+elif button3:
+    st.open("Profiles.py")
+else return
+
 st.write("# Analysis of Factors Affecting U.S. Permanent Residency Using Data and Predictive Analytics")
 image = Image.open('green card.jfif')
 

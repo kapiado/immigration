@@ -23,8 +23,8 @@ if current_page != page:
 # Render different pages based on the selected option
 if page == 'Overview':
     #overview = importlib.import_module('Overview')
-    overview = "https://github.com/kapiado/immigration/blob/97e531d6bdaca4d5564ce41652686c8021f503f0/1_Overview.py"
-    overview.render()
+    url = "https://github.com/kapiado/immigration/blob/97e531d6bdaca4d5564ce41652686c8021f503f0/1_Overview.py"
+    st.markdown(f'<a href="{url}" target="_blank">Go to Example.com</a>', unsafe_allow_html=True)
 elif page == 'Average Waiting Time':
     avgwaittime = importlib.import_module('Average Waiting Time')
     avgwaittime.render()

@@ -22,7 +22,7 @@ if current_page != page:
     st.session_state.current_page = page
     
 # Raw file URL on GitHub
-file_url = 'https://github.com/kapiado/immigration/'
+file_url = 'https://github.com/kapiado/immigration/blob/main/'
 
 
     

@@ -24,20 +24,62 @@ if current_page != page:
 # Raw file URL on GitHub
 file_url = 'https://github.com/kapiado/immigration/blob/main/'
 
+import streamlit as st
+import importlib.util
+import requests
 
+# Define the GitHub repository details
+owner = 'kapiado'
+repo = 'immigration'
+
+# Define the page Python file URLs
+home_url = f'https://raw.githubusercontent.com/{owner}/{repo}/main/home.py'
+about_url = f'https://raw.githubusercontent.com/{owner}/{repo}/main/about.py'
+contact_url = f'https://raw.githubusercontent.com/{owner}/{repo}/main/contact.py'
+
+# Fetch the page Python file from the URL
+def fetch_page_file(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    return None
+
+# Import and run the page Python file
+def run_page(page_file):
+    spec = importlib.util.spec_from_loader('module.name', loader=None)
+    module = importlib.util.module_from_spec(spec)
+    exec(page_file, module.__dict__)
+
+# Define the page navigation
+def navigate_pages():
+    st.sidebar.header('Navigation')
+    page = st.sidebar.radio('Go to', ['Home', 'About', 'Contact'])
+    if page == 'Home':
+        page_file = fetch_page_file(home_url)
+    elif page == 'About':
+        page_file = fetch_page_file(about_url)
+    elif page == 'Contact':
+        page_file = fetch_page_file(contact_url)
+    run_page(page_file)
+
+def main():
+    navigate_pages()
+
+if __name__ == '__main__':
+    main()
     
 # Render different pages based on the selected option
-if page == 'Overview':
-    overview = "1_Overview.py"
+#if page == 'Overview':
+    #overview = "1_Overview.py"
     # Retrieve the file content
-    response = requests.get(file_url+overview)
-    file_content = response
+    #response = requests.get(file_url+overview)
+    #file_content = response
 
     # Display the file content
-    st.code(file_content, language='python')
-elif page == 'Average Waiting Time':
-    avgwaittime = importlib.import_module('Average Waiting Time')
-    avgwaittime.render()
-elif page == 'Employee Profile':
-    emp = importlib.import_module('Employee Profile')
-    emp.render()
+    #st.code(file_content, language='python')
+#elif page == 'Average Waiting Time':
+    #avgwaittime = importlib.import_module('Average Waiting Time')
+    #avgwaittime.render()
+#elif page == 'Employee Profile':
+    #emp = importlib.import_module('Employee Profile')
+    #emp.render()

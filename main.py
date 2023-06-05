@@ -12,7 +12,7 @@ import requests
 st.sidebar.header('Navigation')
 
 # Add links to different pages
-page = st.sidebar.selectbox('Go to', ['Overview', 'Average Waiting Time', 'Employee Profile'])
+# page = st.sidebar.selectbox('Go to', ['Overview', 'Average Waiting Time', 'Employee Profile'])
 
 # Use session state to store the current page
 current_page = st.session_state.get('current_page', 'Home')
@@ -24,16 +24,12 @@ if current_page != page:
 # Raw file URL on GitHub
 file_url = 'https://github.com/kapiado/immigration/blob/main/'
 
-import streamlit as st
-import importlib.util
-import requests
-
 # Define the GitHub repository details
 owner = 'kapiado'
 repo = 'immigration'
 
 # Define the page Python file URLs
-home_url = f'https://raw.githubusercontent.com/{owner}/{repo}/main/home.py'
+home_url = f'https://raw.githubusercontent.com/{owner}/{repo}/blob/main/1_Overview.py'
 about_url = f'https://raw.githubusercontent.com/{owner}/{repo}/main/about.py'
 contact_url = f'https://raw.githubusercontent.com/{owner}/{repo}/main/contact.py'
 

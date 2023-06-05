@@ -31,7 +31,7 @@ if page == 'Overview':
     overview = "1_Overview.py"
     # Retrieve the file content
     response = requests.get(file_url+overview)
-    file_content = response.text
+    file_content = response
 
     # Display the file content
     st.code(file_content, language='python')

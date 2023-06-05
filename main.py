@@ -6,6 +6,7 @@ Created on Mon Jun  5 10:17:05 2023
 """
 import streamlit as st
 import importlib
+import requests
 
 # Create a sidebar
 st.sidebar.header('Navigation')
@@ -19,12 +20,21 @@ current_page = st.session_state.get('current_page', 'Home')
 # Update the current page if a new page is selected
 if current_page != page:
     st.session_state.current_page = page
+    
+# Raw file URL on GitHub
+file_url = 'https://github.com/kapiado/immigration/'
 
+
+    
 # Render different pages based on the selected option
 if page == 'Overview':
-    #overview = importlib.import_module('Overview')
-    url = "https://github.com/kapiado/immigration/blob/97e531d6bdaca4d5564ce41652686c8021f503f0/1_Overview.py"
-    st.markdown(f'<a href="{url}" target="_blank">Go to Example.com</a>', unsafe_allow_html=True)
+    overview = "1_Overview.py"
+    # Retrieve the file content
+    response = requests.get(file_url+overview)
+    file_content = response.text
+
+    # Display the file content
+    st.code(file_content, language='python')
 elif page == 'Average Waiting Time':
     avgwaittime = importlib.import_module('Average Waiting Time')
     avgwaittime.render()

@@ -13,6 +13,13 @@ st.sidebar.header('Navigation')
 # Add links to different pages
 page = st.sidebar.selectbox('Go to', ['Overview', 'Average Waiting Time', 'Employee Profile'])
 
+# Use session state to store the current page
+current_page = st.session_state.get('current_page', 'Home')
+
+# Update the current page if a new page is selected
+if current_page != page:
+    st.session_state.current_page = page
+
 # Render different pages based on the selected option
 if page == 'Overview':
     overview = importlib.import_module('Overview')

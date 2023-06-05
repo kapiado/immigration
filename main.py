@@ -12,7 +12,7 @@ import subprocess
 st.sidebar.header('Navigation')
 
 # Add links to different pages
-# page = st.sidebar.selectbox('Go to', ['Overview', 'Average Waiting Time', 'Employee Profile'])
+page = st.sidebar.selectbox('Go to', ['Overview', 'Average Waiting Time', 'Employee Profile'])
 
 # Use session state to store the current page
 current_page = st.session_state.get('current_page', 'Home')

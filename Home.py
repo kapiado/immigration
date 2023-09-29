@@ -29,6 +29,9 @@ button1 = sideb.button("Home")
 button2 = sideb.button("Overview")
 button3 = sideb.button("Profiles")
 
+if button2:
+    switch_page("Overview")
+
 #if button1:
     #python "Home.py"
 #elif button2:

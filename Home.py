@@ -22,7 +22,7 @@ st.set_page_config(
 )
 #st.sidebar.success("Select a page above.")
 #st.sidebar.title("Home")
-switch_page("New page name")
+switch_page("Overview")
 
 sideb = st.sidebar
 button1 = sideb.button("Home")

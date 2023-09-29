@@ -4,7 +4,7 @@ Created on Wed Apr 19 16:46:34 2023
 
 @author: katri
 """
-
+pip install streamlit_extras
 import streamlit as st
 import streamlit.components.v1 as components
 # import numpy as np

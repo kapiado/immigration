@@ -14,8 +14,6 @@ import pandas as pd
 from PIL import Image
 from streamlit_extras.switch_page_button import switch_page
 
-switch_page("New page name")
-
 st.set_page_config(
     page_title="Home",
     page_icon="👋",

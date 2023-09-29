@@ -7,7 +7,6 @@ Created on Wed Apr 19 16:46:34 2023
 
 import streamlit as st
 import streamlit.components.v1 as components
-import streamlit_extras
 # import numpy as np
 import pandas as pd
 # import plotly.express as px          # Plotly

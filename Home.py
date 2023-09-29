@@ -12,6 +12,9 @@ import pandas as pd
 # import plotly.express as px          # Plotly
 # import plotly.graph_objects as go
 from PIL import Image
+from streamlit_extras.switch_page_button import switch_page
+
+switch_page("New page name")
 
 st.set_page_config(
     page_title="Home",
@@ -19,6 +22,7 @@ st.set_page_config(
 )
 #st.sidebar.success("Select a page above.")
 #st.sidebar.title("Home")
+switch_page("New page name")
 
 sideb = st.sidebar
 button1 = sideb.button("Home")

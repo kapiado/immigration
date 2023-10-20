@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from Home import home
 from Overview import overview
-from sidebar import sideBar
+from Sidebar import sideBar
 from Employee_Profile import employeeprofile
 #from dataCleaning import v2
 #from backendInterface import interface

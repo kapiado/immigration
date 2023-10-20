@@ -69,7 +69,4 @@ def home():
 
     f 'rest' not in st.session_state:
         st.session_state.rest = 0
-
-    def set_stage():
-        home()
    

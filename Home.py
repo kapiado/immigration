@@ -66,3 +66,10 @@ def home():
     st.write("")
     e = st.empty()
     e.write('Galetti, Beth. “Amazon Urges Green Card Allocation to Help Immigrant Employees.” Amazon, Aug. 2022, www.aboutamazon.com/news/policy-news-views/amazon-urges-green-card-allocation-to-help-immigrant-employees.')
+
+    f 'rest' not in st.session_state:
+        st.session_state.rest = 0
+
+    def set_stage():
+        home()
+   

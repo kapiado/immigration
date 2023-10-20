@@ -23,7 +23,7 @@ def overview():
         components.html(source_code,height=480)
         
     def avgwait():    
-        HtmlFile = open("AverageWaitingTime.html", 'r', encoding='utf-8')
+        HtmlFile = open(path+"AverageWaitingTime.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
         print(source_code)
         components.html(source_code,height=600)

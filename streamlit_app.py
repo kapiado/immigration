@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from Home import home
+from Homepage import home
 from Overview import overview
 from Sidebar import sideBar
 from Employee_Profile import employeeprofile

@@ -15,7 +15,7 @@ import streamlit as st
 
 
 def sideBar():
-    tabs = ["Home", "Overview","Employee Profile"]
+    tabs = ["Home","Overview","Employee Profile"]
 
     st.sidebar.subheader("Navigation")
     home_button = st.sidebar.button("Home", key="Home", type="secondary")
@@ -23,7 +23,7 @@ def sideBar():
     employeeprofile_button = st.sidebar.button("Employee Profile", key="Employee Profile", type="secondary")
     #dashboard_button = st.sidebar.button("Predictive Dashboard", key="Predictive Dashboard", type="secondary")
     st.write(" ")
-    #st.sidebar.subheader("Methodology")
+    st.sidebar.subheader("Methodology")
     #data_description_button = st.sidebar.button("Data Description", key="Data Description", type="secondary")
     #data_cleaning_button = st.sidebar.button("Data Cleaning", key="Data Cleaning", type="secondary")
     #clustering_button = st.sidebar.button("Clustering", key="Clustering", type="secondary")

@@ -3,6 +3,7 @@ import streamlit as st
 from Home import home
 from Overview import overview
 from sidebar import sideBar
+from Employee_Profile import employeeprofile
 #from dataCleaning import v2
 #from backendInterface import interface
 #from methodology import methMain
@@ -20,8 +21,8 @@ def initializeSideBar():
     if selection[0]:
         overview()
         st.session_state.counter = 1
-    #if selection[1]:
-    #    interface()
+    if selection[1]:
+        employeeprofile()
     #if selection[2]:
     #    dataDesc()
     #if selection[3]:

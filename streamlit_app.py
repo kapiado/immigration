@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from Home import home
 from Overview import overview
 from sidebar import sideBar
 #from dataCleaning import v2
@@ -13,7 +14,7 @@ from sidebar import sideBar
 def initializeSideBar():
     if "counter" not in st.session_state:
         st.session_state.counter = 0
-        introduction()
+        home()
 
     selection = sideBar()
     if selection[0]:

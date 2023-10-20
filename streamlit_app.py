@@ -19,12 +19,12 @@ def initializeSideBar():
 
     selection = sideBar()
     if selection[0]:
-        overview()
+        home()
         st.session_state.counter = 1
     if selection[1]:
+        overview()
+    if selection[2]:
         employeeprofile()
-    #if selection[2]:
-    #    dataDesc()
     #if selection[3]:
     #    methMain()
     #if selection[4]:

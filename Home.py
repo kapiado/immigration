@@ -28,21 +28,21 @@ def home():
     
     st.image(image,caption='Figure 1: Green Card Resident Image (Amazon)')
     
-    def cases():
-        HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')
-        source_code = HtmlFile.read() 
-        print(source_code)
-        components.html(source_code,height=600)
+    # def cases():
+        # HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')
+        # source_code = HtmlFile.read() 
+        # print(source_code)
+        # components.html(source_code,height=600)
         
-    def avgwait():
-        HtmlFile = open("AvgWaitingTime.html", 'r', encoding='utf-8')
-        source_code = HtmlFile.read() 
-        print(source_code)
-        components.html(source_code,height=600)
+    # def avgwait():
+    #     HtmlFile = open("AvgWaitingTime.html", 'r', encoding='utf-8')
+    #     source_code = HtmlFile.read() 
+    #     print(source_code)
+    #     components.html(source_code,height=600)
         
     st.header('Background')
-    p = open("CasesReceived.html")
-    components.html(p.read(),height=600)
+    # p = open("CasesReceived.html")
+    # components.html(p.read(),height=600)
     c = st.empty()
     c.write('The immigration backlog is a result of the accumulation of immigration applications that have not been processed within a reasonable timeframe. \nIt is caused by increased demand, insufficient resources, complex procedures, and policy changes. Backlogs lead to delays in family reunification, economic impact, strain on resources, and uncertainty for individuals. In this dashboard, we aim to achieve transparency for individuals that are in the middle of the process and want to begin the process for residency. We will be  looking at historical data and factors that influence the wait times in this process, and provide an interface where users can predict their personal waiting time based on their demographics.')
     
@@ -67,6 +67,3 @@ def home():
     e = st.empty()
     e.write('Galetti, Beth. “Amazon Urges Green Card Allocation to Help Immigrant Employees.” Amazon, Aug. 2022, www.aboutamazon.com/news/policy-news-views/amazon-urges-green-card-allocation-to-help-immigrant-employees.')
 
-    f 'rest' not in st.session_state:
-        st.session_state.rest = 0
-   

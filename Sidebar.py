@@ -15,7 +15,7 @@ import streamlit as st
 
 
 def sideBar():
-    tabs = ["Home", "Overview"]
+    tabs = ["Home", "Overview","Employee Profile"]
 
     st.sidebar.subheader("Navigation")
     home_button = st.sidebar.button("Home", key="Home", type="secondary")
@@ -31,7 +31,7 @@ def sideBar():
     #results_button = st.sidebar.button("Results", key="Results", type="secondary")
 
     # Store the buttons in a list
-    selection = [home_button, overview_button]
+    selection = [home_button, overview_button, employeeprofile_button]
 
     # Return the list of buttons
     return selection

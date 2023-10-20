@@ -20,6 +20,7 @@ def sideBar():
     st.sidebar.subheader("Navigation")
     home_button = st.sidebar.button("Home", key="Home", type="secondary")
     overview_button = st.sidebar.button("Overview", key="Overview", type="secondary")
+    employeeprofile_button = st.sidebar.button("Employee Profile", key="Employee Profile", type="secondary")
     #dashboard_button = st.sidebar.button("Predictive Dashboard", key="Predictive Dashboard", type="secondary")
     st.write(" ")
     #st.sidebar.subheader("Methodology")

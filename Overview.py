@@ -17,13 +17,13 @@ def overview():
     path = "HTML Files/"
 
     def cases():
-        HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')
+        HtmlFile = open(path+"CasesReceived.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
         print(source_code)
         components.html(source_code,height=480)
         
     def avgwait():    
-        HtmlFile = open(path+"AverageWaitingTime.html", 'r', encoding='utf-8')
+        HtmlFile = open(path+"AvgWaitingTime.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
         print(source_code)
         components.html(source_code,height=600)

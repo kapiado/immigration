@@ -24,7 +24,7 @@ def employeeprofile():
         HtmlFile = open(path+"AverageWaitingTimebyJob.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
         print(source_code)
-        components.html(source_code,height=2000,width=1500)
+        components.html(source_code,height=2000,width=2000)
         
     def NAICSvsNumCases():
         #HtmlFile = open(path+"NAICSvsNumCases.html", 'r', encoding='utf-8') v1

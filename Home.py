@@ -12,7 +12,6 @@ import pandas as pd
 # import plotly.express as px          # Plotly
 # import plotly.graph_objects as go
 from PIL import Image
-from streamlit_extras import switch_page
 #from streamlit_extras.switch_page_button import switch_page
 #st.set_page_config(
 #    page_title="Home",

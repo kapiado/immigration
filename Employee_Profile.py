@@ -7,6 +7,7 @@ Created on Sun Jun  4 21:59:07 2023
 
 import streamlit as st
 import streamlit.components.v1 as components
+from PIL import Image
 
 def employeeprofile():
 
@@ -105,7 +106,7 @@ def employeeprofile():
         st.session_state.rest = 0
 
     def set_stage():
-        resultMain()
+        employeeprofile()
    
     
     

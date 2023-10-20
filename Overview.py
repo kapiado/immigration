@@ -14,7 +14,7 @@ def overview():
     #st.set_page_config(page_title="Overview")
     st.write("# Overview")
 
-    #path = "C:/Users/kapia/multipage_app/HTML Files/"
+    path = "HTML Files/"
 
     def cases():
         HtmlFile = open("CasesReceived.html", 'r', encoding='utf-8')

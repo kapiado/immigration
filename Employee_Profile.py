@@ -11,7 +11,7 @@ from PIL import Image
 
 def employeeprofile():
 
-    st.set_page_config(page_title="Employee Profile")
+        #st.write("# Employ")
     
     st.markdown("# Employee Profile")
     

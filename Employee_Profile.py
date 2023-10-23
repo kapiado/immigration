@@ -89,32 +89,32 @@ def employeeprofile():
         tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Year","Industry","Nationality","Salary","Unit of Pay","Highest Education"])
             
         with tab1:
-        WTvsYear()
+                WTvsYear()
                
         with tab2:
-        NumCasesvsNAICSTop10()
-        NumCasesvsNAICSBot10()
-        WTvsNAICSTop10()
-        WTvsNAICSBot10()
+                NumCasesvsNAICSTop10()
+                NumCasesvsNAICSBot10()
+                WTvsNAICSTop10()
+                WTvsNAICSBot10()
             
         with tab3:
-        nationality()
+                nationality()
                 
         with tab4:
-        NumCasesvsSalary()
-        WTvsSalary()
+                NumCasesvsSalary()
+                WTvsSalary()
                 
         with tab5:
-        unitofpay()
+                        unitofpay()
                 
         with tab6:
-        HighestEducation()
+                HighestEducation()
                 
         if 'rest' not in st.session_state:
-        st.session_state.rest = 0
+                st.session_state.rest = 0
         
         def set_stage():
-        employeeprofile()
+                employeeprofile()
            
             
             

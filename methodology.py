@@ -40,3 +40,9 @@ def methMain():
         st.write('' + columns_dropped)
     #st.caption("        More columns dropped due to high level of nulls, irrelenvant info about the medical center, or redundancy")
     st.write("")
+
+    if 'rest' not in st.session_state:
+        st.session_state.rest = 0
+                
+    def set_stage():
+        methMain()

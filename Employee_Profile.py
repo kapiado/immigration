@@ -103,11 +103,11 @@ def employeeprofile():
         with tab6:
                 HighestEducation()
                 
-        # if 'rest' not in st.session_state:
-        #         st.session_state.rest = 0
+        if 'rest' not in st.session_state:
+        	st.session_state.rest = 0
         
-        # def set_stage():
-        #         employeeprofile()
+        def set_stage():
+        	employeeprofile()
            
             
             

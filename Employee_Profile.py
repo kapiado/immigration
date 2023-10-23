@@ -27,25 +27,25 @@ def employeeprofile():
                 HtmlFile = open(updatedpath+"OccvsNumCases.html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 
                 print(source_code)
-                components.html(source_code,height=1000, width=1000)
+                components.html(source_code,height=600)
         
         def NumCasesvsNAICSBot10():
                 HtmlFile = open(updatedpath+"OccvsNumCasesBottom10.html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 
                 print(source_code)
-                components.html(source_code,height=1000, width=1000)
+                components.html(source_code,height=600)
                         
         def WTvsNAICSTop10():
                 HtmlFile = open(updatedpath+"AvgWTperOcc.html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 
                 print(source_code)
-                components.html(source_code,height=1000, width=1000)  
+                components.html(source_code,height=600)  
         
         def WTvsNAICSTBot10():
                 HtmlFile = open(updatedpath+"AvgWTperOccBottom10.html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 
                 print(source_code)
-                components.html(source_code,height=1000, width=1000)  
+                components.html(source_code,height=600)  
                         
         def WTvsSalary():
                 HtmlFile = open(path+"WTvsEmployeeSalary (3).html", 'r', encoding='utf-8')

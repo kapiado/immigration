@@ -22,7 +22,7 @@ def employeeprofile():
                 HtmlFile = open(updatedpath+"Avgwtperyr.html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 
                 print(source_code)
-                #components.html(source_code,height=600)        
+                components.html(source_code,height=600)        
                 
         def NumCasesvsNAICSTop10():
                 HtmlFile = open(updatedpath+"OccvsNumCases.html", 'r', encoding='utf-8')

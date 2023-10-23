@@ -4,9 +4,10 @@ from Homepage import home
 from Overview import overview
 from Sidebar import sideBar
 from Employee_Profile import employeeprofile
+from methodology import methMain
 #from dataCleaning import v2
 #from backendInterface import interface
-#from methodology import methMain
+
 #from dataDescription import dataDesc
 #from clustering import clustMain
 #from results import resultMain
@@ -25,8 +26,8 @@ def initializeSideBar():
         overview()
     if selection[2]:
         employeeprofile()
-    #if selection[3]:
-    #    methMain()
+    if selection[3]:
+        methMain()
     #if selection[4]:
     #    clustMain()
     #if selection[5]:

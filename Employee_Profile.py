@@ -48,13 +48,6 @@ def employeeprofile():
                 print(source_code)
                 components.html(source_code,height=1000, width=1000)  
                 
-        def WTvsNumCases():
-                HtmlFile = open(path+"AvgWTvsNumCasesperIndustry(RedLine) (2).html", 'r', encoding='utf-8')
-                source_code = HtmlFile.read() 
-                print(source_code)
-                #components.html(source_code)
-                components.html(source_code,height=1000, width=1000)
-                
         def WTvsSalary():
                 HtmlFile = open(path+"WTvsEmployeeSalary (3).html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 

@@ -15,7 +15,7 @@ import streamlit as st
 
 
 def sideBar():
-    tabs = ["Home","Overview","Employee Profile"]
+    tabs = ["Home","Overview","Employee Profile","Data Cleaning"]
 
     st.sidebar.subheader("Navigation")
     home_button = st.sidebar.button("Home", key="Home", type="secondary")
@@ -25,13 +25,13 @@ def sideBar():
     st.write(" ")
     st.sidebar.subheader("Methodology")
     #data_description_button = st.sidebar.button("Data Description", key="Data Description", type="secondary")
-    #data_cleaning_button = st.sidebar.button("Data Cleaning", key="Data Cleaning", type="secondary")
+    data_cleaning_button = st.sidebar.button("Data Cleaning", key="Data Cleaning", type="secondary")
     #clustering_button = st.sidebar.button("Clustering", key="Clustering", type="secondary")
     #ml_button = st.sidebar.button("Machine Learning", key="Machine Learning", type="secondary")
     #results_button = st.sidebar.button("Results", key="Results", type="secondary")
 
     # Store the buttons in a list
-    selection = [home_button, overview_button, employeeprofile_button]
+    selection = [home_button, overview_button, employeeprofile_button, data_cleaning_button]
 
     # Return the list of buttons
     return selection

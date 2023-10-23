@@ -41,7 +41,7 @@ def employeeprofile():
                 print(source_code)
                 components.html(source_code,height=600)  
         
-        def WTvsNAICSTBot10():
+        def WTvsNAICSBot10():
                 HtmlFile = open(updatedpath+"AvgWTperOccBottom10.html", 'r', encoding='utf-8')
                 source_code = HtmlFile.read() 
                 print(source_code)

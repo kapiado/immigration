@@ -80,9 +80,9 @@ def employeeprofile():
             
                 
         tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Year","Industry","Nationality","Salary","Unit of Pay","Highest Education"])
-            
-        with tab1:
-                WTvsYear()
+	
+	with tab1:
+		WTvsYear()
                
         with tab2:
                 NumCasesvsNAICSTop10()
@@ -103,11 +103,11 @@ def employeeprofile():
         with tab6:
                 HighestEducation()
                 
-        if 'rest' not in st.session_state:
-        	st.session_state.rest = 0
+        # if 'rest' not in st.session_state:
+        # 	st.session_state.rest = 0
         
-        def set_stage():
-        	employeeprofile()
+        # def set_stage():
+        # 	employeeprofile()
            
             
             

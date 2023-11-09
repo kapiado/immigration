@@ -5,4 +5,4 @@ numpy
 plotly
 seaborn
 pickle
-sklearn
+scikit-learn

@@ -7,9 +7,6 @@ import streamlit as st          # Streamlit
 import matplotlib.pyplot as plt # Matplotlib
 import seaborn as sns           # Seaborn
 
-# Module to save and load Python objects to and from files
-import pickle 
-
 # Package to implement Decision Tree Model
 import sklearn
 from sklearn.tree import DecisionTreeClassifier
@@ -45,26 +42,7 @@ def predictionmodel():
 
          data_format = load_data('penguins_sample.csv')
          st.dataframe(data_format, hide_index = True)
-         
-         # Setting the default option to load our Decision Tree model
-         # if there is no penguin file uploaded by the user
-         if penguin_file is None: 
-             # Load default dataset
-             # This dataset will be used later for plotting histograms
-             # in case if the user does not provide any data
-             penguin_df = pd.read_csv('penguins.csv') 
-         
-             # Loading model and mapping pickle files
-             dt_pickle = open('decision_tree_penguin.pickle', 'rb') 
-             map_pickle = open('output_penguin.pickle', 'rb') 
-             clf = pickle.load(dt_pickle) 
-             unique_penguin_mapping = pickle.load(map_pickle) 
-             dt_pickle.close() 
-             map_pickle.close() 
 
-         # If the file is provided, we need to clean it and train a model on it
-         # similar to what we did in the Jupyter notebook
-         else: 
              # Load dataset as dataframe
              penguin_df = pd.read_csv(penguin_file) 
              # Dropping null values

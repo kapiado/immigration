@@ -28,7 +28,7 @@ def predictionmodel():
                   " to get started!") 
          
          # Asking users to input their own data
-    penguin_file = st.file_uploader('Upload your own penguin data to train the model') 
+    penguin_file = 'penguins.csv'
          
      # Display an example dataset and prompt the user 
      # to submit the data in the required format.

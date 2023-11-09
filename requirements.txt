@@ -3,3 +3,4 @@ streamlit-extras
 pandas
 numpy
 plotly
+seaborn

@@ -59,7 +59,8 @@ def predictionmodel():
     # Data partitioning into training and testing 
     train_X, test_X, train_y, test_y = train_test_split(features, output, test_size = 0.2, random_state = 1) 
     # Defining prediction model
-    clf = DecisionTreeClassifier(random_state = 0)
+    dt_pickle = open('decision_tree_penguin.pickle', 'rb') 
+    clf = pickle.load(dt_pickle) 
     # Fitting model on training data
     clf.fit(train_X, train_y) 
     # Making predictions on test set

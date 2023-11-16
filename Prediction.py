@@ -8,7 +8,7 @@ import pickle
 # Function to load the model and make predictions
 def load_and_predict(input_data):
     # Load the pickled model
-    with open('model.pkl', 'rb') as file:
+    with open('rf_model.sav', 'rb') as file:
         model = pickle.load(file)
 
     # Make predictions using the loaded model (replace this with your model's prediction logic)

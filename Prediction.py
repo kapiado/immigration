@@ -144,26 +144,26 @@ def interface():
         st.button('View Prediction', on_click=executeQuery, args=(st.session_state.input, ))
     
     # Using predict() with new data provided by the user
-    new_prediction = clf.predict([[bill_length_mm, bill_depth_mm, flipper_length_mm, 
-      body_mass_g, island_Biscoe, island_Dream, island_Torgerson, sex_female, sex_male]]) 
+    # new_prediction = clf.predict([[bill_length_mm, bill_depth_mm, flipper_length_mm, 
+    #   body_mass_g, island_Biscoe, island_Dream, island_Torgerson, sex_female, sex_male]]) 
     
-    # Map prediction with penguin species
-    prediction_species = unique_penguin_mapping[new_prediction][0]
+    # # Map prediction with penguin species
+    # prediction_species = unique_penguin_mapping[new_prediction][0]
     
-    # Show the predicted species on the app
-    st.subheader("Predicting Your Penguin's Species")
-    st.write('We predict your penguin is of the {} species'.format(prediction_species)) 
+    # # Show the predicted species on the app
+    # st.subheader("Predicting Your Penguin's Species")
+    # st.write('We predict your penguin is of the {} species'.format(prediction_species)) 
     
-    # Showing additional items
-    # st.subheader("Prediction Performance")
-    # tab1, tab2, tab3, tab4 = st.tabs(["Decision Tree", "Feature Importance", "Confusion Matrix", "Classification Report"])
+    # # Showing additional items
+    # # st.subheader("Prediction Performance")
+    # # tab1, tab2, tab3, tab4 = st.tabs(["Decision Tree", "Feature Importance", "Confusion Matrix", "Classification Report"])
     
-    # with tab1:
-    #   st.image('dt_visual.svg')
-    # with tab2:
-    #   st.image('feature_imp.svg')
-    # with tab3:
-    #   st.image('confusion_mat.svg')
-    # with tab4:
-    #     df = pd.read_csv('class_report.csv', index_col=0)
-    #     st.dataframe(df)
+    # # with tab1:
+    # #   st.image('dt_visual.svg')
+    # # with tab2:
+    # #   st.image('feature_imp.svg')
+    # # with tab3:
+    # #   st.image('confusion_mat.svg')
+    # # with tab4:
+    # #     df = pd.read_csv('class_report.csv', index_col=0)
+    # #     st.dataframe(df)

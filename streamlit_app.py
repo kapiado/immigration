@@ -5,7 +5,7 @@ from Overview import overview
 from Sidebar import sideBar
 from Employee_Profile import employeeprofile
 from methodology import methMain
-from Prediction import predictionmodel
+from Prediction import interface
 #from dataCleaning import v2
 #from backendInterface import interface
 
@@ -30,7 +30,7 @@ def initializeSideBar():
     if selection[3]:
         methMain()
     if selection[4]:
-        predictionmodel()
+        interface()
     #if selection[5]:
     #    mlMain()
     #if selection[6]:

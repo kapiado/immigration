@@ -28,4 +28,4 @@ def user_form():
     user()
 
 if __name__ == "__main__":
-    main()
+    user_form()

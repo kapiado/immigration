@@ -57,6 +57,13 @@ def predictionmodel():
       sex_female = 1 
     elif sex == 'Male': 
       sex_male = 1 
+
+def interface():
+    st.title("Backend Interface")
+    if 'stage' not in st.session_state:
+        st.session_state.stage = 0
+        st.session_state.input = []
+        st.session_state.ret = []
     
     # Using predict() with new data provided by the user
     new_prediction = clf.predict([[bill_length_mm, bill_depth_mm, flipper_length_mm, 

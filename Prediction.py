@@ -15,7 +15,7 @@ def user_form():
             #     model = pickle.load(file)
         
             # Make predictions using the loaded model (replace this with your model's prediction logic)
-        prediction = 42
+        prediction = st.text('42')
         return prediction
     st.title('User Form')
 

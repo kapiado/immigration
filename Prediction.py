@@ -8,6 +8,15 @@ import pickle
 
 
 def user_form():
+            # Function to load the model and make predictions
+    def load_and_predict(input_data):
+            # Load the pickled model
+            # with open('rf_model.sav', 'rb') as file:
+            #     model = pickle.load(file)
+        
+            # Make predictions using the loaded model (replace this with your model's prediction logic)
+        prediction = 42
+        return prediction
     st.title('User Form')
 
     with st.form(key='my_form'):
@@ -23,16 +32,6 @@ def user_form():
                 'Age': age,
                 'Gender': gender
             }
-        
-        # Function to load the model and make predictions
-        def load_and_predict(input_data):
-            # Load the pickled model
-            # with open('rf_model.sav', 'rb') as file:
-            #     model = pickle.load(file)
-        
-            # Make predictions using the loaded model (replace this with your model's prediction logic)
-            prediction = 42
-            return prediction
             
         prediction = load_and_predict(input_data)
         st.success(f"Prediction: {prediction}")

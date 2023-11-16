@@ -26,5 +26,5 @@ def user_form():
         user_data = st.session_state.user_data
         st.write(f"Name: {user_data['Name']}, Age: {user_data['Age']}, Gender: {user_data['Gender']}")
 
-    if __name__ == "__main__":
-        user_form()
+if __name__ == "__main__":
+    user_form()

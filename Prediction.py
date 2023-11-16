@@ -17,7 +17,7 @@ def user_form():
 
         if st.button('Submit'):
             input_data = {'Name': name, 'Age': age, 'Gender': gender}
-            st.session_state.ret = f"Name: {name}, Age: {age}, Gender: {gender}"
+            st.session_state.ret = f"Thank you!"
             st.session_state.stage += 1
 
     elif st.session_state.stage > 0:

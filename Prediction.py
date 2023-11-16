@@ -19,25 +19,48 @@ def load_and_predict(input_data):
 def user_form():
     st.title('User Form')
 
-    if 'name' not in st.session_state:
-        st.session_state.name = st.text_input('Enter your name')
+    with st.form(key='my_form'):
+        name = st.text_input('Enter your name')
+        age = st.slider('Enter your age', 1, 100)
+        gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
 
-    if 'age' not in st.session_state:
-        st.session_state.age = st.slider('Enter your age', 1, 100)
+        submitted = st.form_submit_button('Submit')
 
-    if 'gender' not in st.session_state:
-        st.session_state.gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
+        if submitted:
+            input_data = {
+                'Name': name,
+                'Age': age,
+                'Gender': gender
+            }
 
-    if st.button('Submit'):
-        input_data = {
-            'Name': st.session_state.name,
-            'Age': st.session_state.age,
-            'Gender': st.session_state.gender
-        }
-
-        prediction = load_and_predict(input_data)
-
-        st.success(f"Prediction: {prediction}")
+            prediction = load_and_predict(input_data)
+            st.success(f"Prediction: {prediction}")
 
 if __name__ == "__main__":
     user_form()
+
+# def user_form():
+#     st.title('User Form')
+
+#     if 'name' not in st.session_state:
+#         st.session_state.name = st.text_input('Enter your name')
+
+#     if 'age' not in st.session_state:
+#         st.session_state.age = st.slider('Enter your age', 1, 100)
+
+#     if 'gender' not in st.session_state:
+#         st.session_state.gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
+
+#     if st.button('Submit'):
+#         input_data = {
+#             'Name': st.session_state.name,
+#             'Age': st.session_state.age,
+#             'Gender': st.session_state.gender
+#         }
+
+#         prediction = load_and_predict(input_data)
+
+#         st.success(f"Prediction: {prediction}")
+
+# if __name__ == "__main__":
+#     user_form()

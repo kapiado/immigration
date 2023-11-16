@@ -4,32 +4,6 @@
 # Import libraries
 import streamlit as st
 import pickle
-# import streamlit.ReportThread as ReportThread
-# from streamlit.server.Server import Server
-from session_state import get_state
-
-class SessionState(object):
-    def __init__(self, **kwargs):
-        for key, val in kwargs.items():
-            setattr(self, key, val)
-
-def get_state(hash_funcs=None):
-    """Gets the SessionState for the current session or creates new."""
-    ctx = ReportThread.get_report_ctx()
-
-    this_session = None
-    current_server = Server.get_current()
-    if hasattr(current_server, '_session_infos'):
-        session_infos = Server.get_current()._session_infos.values()
-        for session_info in session_infos:
-            s = session_info.session
-            if s.id == ctx.session_id:
-                this_session = s
-    if this_session is None:
-        raise RuntimeError("Couldn't get your Streamlit Session object.")
-    if not hasattr(this_session, '_custom_session_state'):
-        this_session._custom_session_state = SessionState(**(hash_funcs or {}))
-    return this_session._custom_session_state
 
 # Function to load the model and make predictions
 def load_and_predict(input_data):
@@ -46,34 +20,24 @@ def load_and_predict(input_data):
 def user_form():
     st.title('User Form')
 
-    # Get session state
-    state = get_state()
+    if 'name' not in st.session_state:
+        st.session_state.name = st.text_input('Enter your name')
 
-    # Text Input for Name
-    name = st.text_input('Enter your name', key="name")
-    state.name = name
+    if 'age' not in st.session_state:
+        st.session_state.age = st.slider('Enter your age', 1, 100)
 
-    # Slider for Age
-    age = st.slider('Enter your age', 1, 100, key="age")
-    state.age = age
+    if 'gender' not in st.session_state:
+        st.session_state.gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
 
-    # Dropdown for Gender
-    gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'], key="gender")
-    state.gender = gender
-
-    # Button to submit the form
     if st.button('Submit'):
-        # Create a dictionary of user input
         input_data = {
-            'Name': state.name,
-            'Age': state.age,
-            'Gender': state.gender
+            'Name': st.session_state.name,
+            'Age': st.session_state.age,
+            'Gender': st.session_state.gender
         }
 
-        # Call the function to load model and make predictions
         prediction = load_and_predict(input_data)
 
-        # Display the prediction or perform any other action
         st.success(f"Prediction: {prediction}")
 
 if __name__ == "__main__":

@@ -12,8 +12,7 @@ def load_and_predict(input_data):
         model = pickle.load(file)
 
     # Make predictions using the loaded model (replace this with your model's prediction logic)
-    prediction = model.predict(input_data)
-    return prediction
+
     prediction = 42
     return prediction
 

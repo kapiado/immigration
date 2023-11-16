@@ -9,11 +9,20 @@ import pickle
 def user_form():
     st.title('User Form')
 
-    name = st.text_input('Enter your name')
-    age = st.slider('Enter your age', 1, 100)
-    gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
+    if 'name' not in st.session_state:
+        st.session_state.name = st.text_input('Enter your name')
+
+    if 'age' not in st.session_state:
+        st.session_state.age = st.slider('Enter your age', 1, 100)
+
+    if 'gender' not in st.session_state:
+        st.session_state.gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
 
     if st.button('Submit'):
+        name = st.session_state.name
+        age = st.session_state.age
+        gender = st.session_state.gender
+
         st.success(f"Name: {name}, Age: {age}, Gender: {gender}")
 
 if __name__ == "__main__":

@@ -4,14 +4,13 @@
 # Import libraries
 import streamlit as st
 import pickle
-
 def user_form():
     st.title('User Form')
 
     if 'stage' not in st.session_state:
-        st.session_state.stage = 'input'
+        st.session_state.stage = 0
 
-    if st.session_state.stage == 'input':
+    if st.session_state.stage == 0:
         name = st.text_input('Enter your name')
         age = st.slider('Enter your age', 1, 100)
         gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
@@ -19,9 +18,9 @@ def user_form():
         if st.button('Submit'):
             input_data = {'Name': name, 'Age': age, 'Gender': gender}
             st.session_state.ret = f"Name: {name}, Age: {age}, Gender: {gender}"
-            st.session_state.stage = 'result'
+            st.session_state.stage += 1
 
-    elif st.session_state.stage == 'result':
+    elif st.session_state.stage > 0:
         st.success(st.session_state.ret)
 
 if __name__ == "__main__":

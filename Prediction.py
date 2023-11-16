@@ -8,23 +8,23 @@ import pickle
 def user_form():
     st.title('User Form')
 
-    if 'name' not in st.session_state:
-        st.session_state.name = st.text_input('Enter your name')
+    if 'stage' not in st.session_state:
+        st.session_state.stage = 'form'
 
-    if 'age' not in st.session_state:
-        st.session_state.age = st.slider('Enter your age', 1, 100)
+    if st.session_state.stage == 'form':
+        name = st.text_input('Enter your name')
 
-    if 'gender' not in st.session_state:
-        st.session_state.gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
+        age = st.slider('Enter your age', 1, 100)
 
-    submit_button = st.button('Submit')
+        gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
 
-    if submit_button:
-        name = st.session_state.name
-        age = st.session_state.age
-        gender = st.session_state.gender
+        if st.button('Submit'):
+            st.session_state.user_data = {'Name': name, 'Age': age, 'Gender': gender}
+            st.session_state.stage = 'result'
 
-        st.success(f"Name: {name}, Age: {age}, Gender: {gender}")
+    elif st.session_state.stage == 'result':
+        user_data = st.session_state.user_data
+        st.write(f"Name: {user_data['Name']}, Age: {user_data['Age']}, Gender: {user_data['Gender']}")
 
     if __name__ == "__main__":
         user_form()

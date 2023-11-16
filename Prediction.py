@@ -5,16 +5,7 @@
 import streamlit as st
 import pickle
 
-# Function to load the model and make predictions
-def load_and_predict(input_data):
-    # Load the pickled model
-    # with open('rf_model.sav', 'rb') as file:
-    #     model = pickle.load(file)
 
-    # Make predictions using the loaded model (replace this with your model's prediction logic)
-
-    prediction = 42
-    return prediction
 
 def user_form():
     st.title('User Form')
@@ -32,9 +23,19 @@ def user_form():
                 'Age': age,
                 'Gender': gender
             }
-
-            prediction = load_and_predict(input_data)
-            st.success(f"Prediction: {prediction}")
+        
+        # Function to load the model and make predictions
+        def load_and_predict(input_data):
+            # Load the pickled model
+            # with open('rf_model.sav', 'rb') as file:
+            #     model = pickle.load(file)
+        
+            # Make predictions using the loaded model (replace this with your model's prediction logic)
+            prediction = 42
+            return prediction
+            
+        prediction = load_and_predict(input_data)
+        st.success(f"Prediction: {prediction}")
 
 if __name__ == "__main__":
     user_form()

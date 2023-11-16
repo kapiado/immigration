@@ -5,7 +5,6 @@
 import streamlit as st
 import pickle
 
-
 def user_form():
     st.title('User Form')
 
@@ -18,12 +17,14 @@ def user_form():
     if 'gender' not in st.session_state:
         st.session_state.gender = st.selectbox('Select your gender', ['Male', 'Female', 'Other'])
 
-    if st.button('Submit'):
+    submit_button = st.button('Submit')
+
+    if submit_button:
         name = st.session_state.name
         age = st.session_state.age
         gender = st.session_state.gender
 
         st.success(f"Name: {name}, Age: {age}, Gender: {gender}")
 
-if __name__ == "__main__":
-    user_form()
+    if __name__ == "__main__":
+        user_form()

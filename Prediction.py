@@ -204,9 +204,9 @@ def interface():
             st.table(df.set_index('Question').T)
 
     def executeQuery(Info):
-        query = [Info[0], Info[1], Info[6], Info[7], Info[3], Info[8], Info[9], Info[2], Info[5], Info[10], Info[4]]
-
-        process(query)
+        #query = [Info[0], Info[1], Info[6], Info[7], Info[3], Info[8], Info[9], Info[2], Info[5], Info[10], Info[4]]
+        st.text('Thank you!')
+        #process(query)
 
     if st.session_state.stage > 0:
         st.button('View Prediction', on_click=executeQuery, args=(st.session_state.input, ))

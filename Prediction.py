@@ -142,7 +142,7 @@ def interface():
 
     # Some code
     with st.form(key='my_form'):
-        codeOptions = ['15-17', '18-20', '21-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65 up']
+        ageOptions = ['15-17', '18-20', '21-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65 up']
         ageInfo = st.selectbox('NAICS Code', ageOptions, help = "Select most appropriate age group")
 
         education_levels = ["0 to 8", "9 to 11", "12 or GED", "12+"]

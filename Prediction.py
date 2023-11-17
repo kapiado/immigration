@@ -143,17 +143,17 @@ def interface():
     # Some code
     with st.form(key='my_form'):
         codeOptions = ['15-17', '18-20', '21-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65 up']
-        ageInfo = st.selectbox('Age Group', ageOptions, help = "Select most appropriate age group")
+        ageInfo = st.selectbox('NAICS Code', ageOptions, help = "Select most appropriate age group")
 
         education_levels = ["0 to 8", "9 to 11", "12 or GED", "12+"]
-        educInfo = st.selectbox("Highest Completed Education Level", education_levels, help = "Select the highest level of education you have completed")
+        educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select the highest level of education you have completed")
 
         employment_statuses = ["Full time", "Part time", "Employed non differentiated", "Unemployed", "Not in labor force"]
-        employInfo = st.selectbox("Employment Status", employment_statuses)
+        employInfo = st.selectbox('Prevailing Wage Amount', employment_statuses)
 
-        genderInfo = st.radio("Sex", options=["Male", "Female"], help = "Sex assigned at birth")
+        genderInfo = st.radio('Country of Citizenship', options=["Male", "Female"], help = "Sex assigned at birth")
 
-        stateInfo = st.selectbox("State of Residence",
+        stateInfo = st.selectbox('Work State',
                                                       ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
                                                        "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
                                                        "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
@@ -162,24 +162,24 @@ def interface():
 
 
         housing_situations = ["Homeless", "Private residence", "Other"]
-        livArangInfo = st.selectbox("Living Arrangement", housing_situations)
+        livArangInfo = st.selectbox('Employer Number of Employees', housing_situations)
 
         ethnicities = ["Mexican", "Puerto Rican", "Other Hispanic or Latino origin", "Not of Hispanic or Latino origin"]
-        ethnicityInfo = st.selectbox("Ethnicity", ethnicities)
+        ethnicityInfo = st.selectbox('Class of Admission', ethnicities)
 
         race_options = ['Native', 'Asian', 'Black or African American', 'Pacific Islander', 'White', 'Other/Multiple']
-        raceInfo = st.selectbox('Race:', options=race_options)
+        raceInfo = st.selectbox('Job Education', options=race_options)
 
         marital_status_options = ['Never married', 'Now married', 'Separated', 'Divorced', 'Widowed']
-        marStatInfo = st.selectbox('Marital Status:', options=marital_status_options)
+        marStatInfo = st.selectbox('Experience', options=marital_status_options)
 
-        sapInfo = st.radio("Substance Abuse History", options=["Yes", "No"], help = "Please select 'yes' if you have experienced issues with substance abuse")
+        sapInfo = st.radio('Months of Experience', options=["Yes", "No"], help = "Please select 'yes' if you have experienced issues with substance abuse")
 
         if sapInfo == "No":
             sapInfo = "Yes"
 
         #veteranInfo = st.radio("Veteran", options=["Yes", "No"])
-        numhs =  st.selectbox("Number of Previously Diagnosed Mental Health Disorders", options = [0, 1, 2, 3], help = "Please enter the number of mental health disorders you have been clinically diagnosed with")
+        numhs =  st.selectbox('Layoff in Past Six Months', options = [0, 1, 2, 3], help = "Please enter the number of mental health disorders you have been clinically diagnosed with")
 
         if numhs == 0:
             numhs = 1
@@ -194,7 +194,7 @@ def interface():
     if st.session_state.stage > 0:
         Info = st.session_state.input
         smt = [Info[0], Info[1], Info[6], Info[7], Info[3], Info[8], Info[9], Info[2], Info[5], Info[10], Info[4]]
-        headers = ['Age', 'Education', 'Ethnicity', 'Race', 'Sex', 'Marital Status', 'Substance Abuse Problem', 'Employment', 'Living Arrangement', 'Mental Health History', 'State']
+        headers =  ['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Work State','Country of Citizenship','Employer Number of Employees','Class of Admission','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):
             data['Question'] = headers

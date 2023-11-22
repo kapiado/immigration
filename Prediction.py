@@ -142,8 +142,16 @@ def interface():
 
     # Some code
     with st.form(key='my_form'):
-        ageOptions = ['15-17', '18-20', '21-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65 up']
-        ageInfo = st.selectbox('NAICS Code', ageOptions, help = "Select most appropriate age group")
+        codeOptions = ['11 - Agriculture, Forestry, Fishing and Hunting', 
+                       '21 - Mining, Quarrying, and Oil and Gas Extraction', 
+                       '22 - Utilities', 
+                       '23 - Construction', 
+                       '31 - Manufacturing (Food, Beverage, Tobacco, Apparel, Leather, Textiles)', 
+                       '32 - Manufacturing (Paper, Printing, Petroleum, Coal, Chemicals, Plastics, Rubber, Nonmetallic)', 
+                       '33 - Manufacturing (Primary Metals, Fabricated Metal, Machinery, Computer and Electronic Products, Electrical Equipment and Appliances, Transportations Equipment, Furniture, Miscellaneous Manufacturing)', 
+                       '42 - Wholesale Trade',
+                       '44 - Automotive ales and services, home furnishing and improvement, food and beverage retail, health and personal care retail, clothing and accessories retail, as well as gasoline stations, '45', '48', '49','51','52','53','54','55','56','61','62','71','72','81','92']
+        codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
 
         education_levels = ["0 to 8", "9 to 11", "12 or GED", "12+"]
         educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select the highest level of education you have completed")
@@ -187,7 +195,7 @@ def interface():
         veteranInfo = "No"
 
         submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
-                    [ageInfo, educInfo, employInfo, genderInfo, stateInfo, livArangInfo, ethnicityInfo, raceInfo, marStatInfo, sapInfo, numhs]))
+                    [codeInfo, educInfo, employInfo, genderInfo, stateInfo, livArangInfo, ethnicityInfo, raceInfo, marStatInfo, sapInfo, numhs]))
 
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 

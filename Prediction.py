@@ -168,13 +168,13 @@ def interface():
                        '92 - Public Administration']
         codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
 
-        education_levels = ["0 to 8", "9 to 11", "12 or GED", "12+"]
+        education_levels = ["1", "2", "3", "4"]
         educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select the highest level of education you have completed")
 
         employment_statuses = ["Full time", "Part time", "Employed non differentiated", "Unemployed", "Not in labor force"]
-        employInfo = st.selectbox('Prevailing Wage Amount', employment_statuses)
+        employInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
 
-        genderInfo = st.radio('Country of Citizenship', options=["Male", "Female"], help = "Sex assigned at birth")
+        genderInfo = st.selectbox('Country of Citizenship', options=["Country 1","Country 2"])
 
         stateInfo = st.selectbox('Work State',
                                                       ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
@@ -202,10 +202,12 @@ def interface():
             sapInfo = "Yes"
 
         #veteranInfo = st.radio("Veteran", options=["Yes", "No"])
-        numhs =  st.selectbox('Layoff in Past Six Months', options = [0, 1, 2, 3], help = "Please enter the number of mental health disorders you have been clinically diagnosed with")
+        numhs =  st.radio('Layoff in Past Six Months', options =["Yes","No"], help = "Please enter the number of mental health disorders you have been clinically diagnosed with")
 
-        if numhs == 0:
-            numhs = 1
+        if numhs == "Yes":
+            numhs = "Y"
+        elif numhs == "No":
+            numhs = "N"
 
         veteranInfo = "No"
 

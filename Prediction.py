@@ -150,9 +150,22 @@ def interface():
                        '32 - Manufacturing (Paper, Printing, Petroleum, Coal, Chemicals, Plastics, Rubber, Nonmetallic)', 
                        '33 - Manufacturing (Primary Metals, Fabricated Metal, Machinery, Computer and Electronic Products, Electrical Equipment and Appliances, Transportations Equipment, Furniture, Miscellaneous Manufacturing)', 
                        '42 - Wholesale Trade',
-                       '44 - Retail Trade (Automotive Sales and Services, Home furnishing and Improvement, Food and Beverage, Health and Personal Care, Clothing and Accessories, Gasoline Stations)',
+                       '44 - Retail Trade (Automotive Sales and Services, Home Furnishing and Improvement, Food and Beverage, Health and Personal Care, Clothing and Accessories, Gasoline Stations)',
                        '45 - Retail Trade (Sporting Goods, Hobbies, Books, Department Stores, General Merchandise Stores, Florists, Office Supplies, Pet Supplies, Art Dealers, Various Specialty Stores)', 
-                       '48 - Transportation and Warehousing', '49','51','52','53','54','55','56','61','62','71','72','81','92']
+                       '48 - Transportation and Warehousing (Air, Rail, Water, Truck, Transit, Pipeline, Scenic and Sightseeing Services, Transportation Support Activities)', 
+                       '49 - Transportation and Warehousing (Federal Government-Operated Postal Services, Couriers, Messengers, Warehousing Storage-Related Services)',
+                       '51 - Information',
+                       '52 - Finance and Insurance',
+                       '53 - Real Estate and Rental and Leasing',
+                       '54 - Professional, Scientific, and Technical Services',
+                       '55 - Management of Companies and Enterprises',
+                       '56 - Administrative and Support and Waste Management and Remediation Services',
+                       '61 - Educational Services',
+                       '62 - Health Care and Social Assistance',
+                       '71 - Arts, Entertainment, and Recreation',
+                       '72 - Accommodation and Food Services',
+                       '81 - Other Services (except Public Administration)',
+                       '92 - Public Administration']
         codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
 
         education_levels = ["0 to 8", "9 to 11", "12 or GED", "12+"]

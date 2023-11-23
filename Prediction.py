@@ -172,7 +172,7 @@ def interface():
         educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select the highest level of education you have completed")
 
         employment_statuses = ["Full time", "Part time", "Employed non differentiated", "Unemployed", "Not in labor force"]
-        employInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
+        employInfo = st.number_input('Prevailing Wage Amount')
 
         genderInfo = st.selectbox('Country of Citizenship', options=["Country 1","Country 2"])
 

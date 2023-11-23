@@ -208,7 +208,7 @@ def interface():
 
 
         education_options = [
-    "Associate's", "Bachelor's", "Doctorate", "High School", 
+    "High School", "Associate's", "Bachelor's", "Doctorate", 
     "Master's", "None", "Other"
 ]
         # was job education -- how to address this since this is the education required by the job

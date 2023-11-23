@@ -234,7 +234,7 @@ def interface():
 
 
         submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
-                    [codeInfo, wagelevelInfo, wageamountInfo, admiclassInfo, countryInfo, stateInfo, employeenumInfo,  educationInfo, expInfo, expmonthsInfo, numhs]))
+                    [codeInfo, wagelevelInfo, wageamountInfo, admiclassInfo, countryInfo, stateInfo, employeenumInfo,  educationInfo, expInfo, expmonthsInfo, layoffInfo]))
 
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 

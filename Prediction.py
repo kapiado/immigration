@@ -127,7 +127,7 @@ def displayInput(Info):
         #st.dataframe(df_transposed)
 
 def interface():
-    st.title("Backend Interface")
+    st.title("Estimate Your Green Card Application Wait Time")
     if 'stage' not in st.session_state:
         st.session_state.stage = 0
         st.session_state.input = []

@@ -169,12 +169,21 @@ def interface():
         codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
 
         education_levels = ["1", "2", "3", "4"]
-        educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select the highest level of education you have completed")
+        educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select most appropriate prevailing wage level")
 
-        employment_statuses = ["Full time", "Part time", "Employed non differentiated", "Unemployed", "Not in labor force"]
-        employInfo = st.number_input('Prevailing Wage Amount')
+        employInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
 
-        genderInfo = st.selectbox('Country of Citizenship', options=["Country 1","Country 2"])
+        genderInfo = st.selectbox('Country of Citizenship', options=[
+    "ARGENTINA", "AUSTRALIA", "BANGLADESH", "BELARUS", "BRAZIL", 
+    "BULGARIA", "CANADA", "CHILE", "CHINA", "COLOMBIA", "ECUADOR", 
+    "EGYPT", "FRANCE", "GERMANY", "GREECE", "HONG KONG", "INDIA", 
+    "INDONESIA", "IRAN", "IRELAND", "ISRAEL", "ITALY", "JAPAN", 
+    "JORDAN", "LEBANON", "MALAYSIA", "MEXICO", "NEPAL", "NETHERLANDS", 
+    "NIGERIA", "PAKISTAN", "PERU", "PHILIPPINES", "POLAND", "ROMANIA", 
+    "RUSSIA", "SINGAPORE", "SOUTH AFRICA", "SOUTH KOREA", "SPAIN", 
+    "SRI LANKA", "SWEDEN", "SYRIA", "TAIWAN", "THAILAND", "TURKEY", 
+    "UKRAINE", "UNITED KINGDOM", "VENEZUELA", "VIETNAM"
+])
 
         stateInfo = st.selectbox('Work State',
                                                       ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
@@ -183,33 +192,39 @@ def interface():
                                                        "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
                                                        "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"])
 
+        livArangInfo = st.number_input('Employer Number of Employees', min_value = 0)
 
-        housing_situations = ["Homeless", "Private residence", "Other"]
-        livArangInfo = st.selectbox('Employer Number of Employees', housing_situations)
-
-        ethnicities = ["Mexican", "Puerto Rican", "Other Hispanic or Latino origin", "Not of Hispanic or Latino origin"]
+        ethnicities = [
+    "A-3", "A1/A2", "B-1", "B-2", "C-1", "C-3", "CW-1", "D-1", "D-2", 
+    "E-1", "E-2", "E-3", "EWI", "F-1", "F-2", "G-1", "G-4", "G-5", 
+    "H-1A", "H-1B", "H-1B1", "H-2A", "H-2B", "H-3", "H-4", "I", 
+    "J-1", "J-2", "K-4", "L-1", "L-2", "M-1", "M-2", "N", "Not in USA", 
+    "O-1", "O-2", "O-3", "P-1", "P-3", "P-4", "Parolee", "Q", 
+    "R-1", "R-2", "T-1", "T-2", "TD", "TN", "TPS", "U-1", "V-2", 
+    "VWB", "VWT"
+]
         ethnicityInfo = st.selectbox('Class of Admission', ethnicities)
 
-        race_options = ['Native', 'Asian', 'Black or African American', 'Pacific Islander', 'White', 'Other/Multiple']
+        race_options = [
+    "Associate's", "Bachelor's", "Doctorate", "High School", 
+    "Master's", "None", "Other"
+]
         raceInfo = st.selectbox('Job Education', options=race_options)
+        
+        marStatInfo = st.radio('Experience', options=["Yes","No"])
 
-        marital_status_options = ['Never married', 'Now married', 'Separated', 'Divorced', 'Widowed']
-        marStatInfo = st.selectbox('Experience', options=marital_status_options)
+        sapInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
 
-        sapInfo = st.radio('Months of Experience', options=["Yes", "No"], help = "Please select 'yes' if you have experienced issues with substance abuse")
-
-        if sapInfo == "No":
-            sapInfo = "Yes"
-
-        #veteranInfo = st.radio("Veteran", options=["Yes", "No"])
-        numhs =  st.radio('Layoff in Past Six Months', options =["Yes","No"], help = "Please enter the number of mental health disorders you have been clinically diagnosed with")
+        #if sapInfo == "No":
+            #sapInfo = "Yes"
+        
+        numhs =  st.radio('Layoff in Past Six Months', options =["Yes","No"])
 
         if numhs == "Yes":
             numhs = "Y"
         elif numhs == "No":
             numhs = "N"
 
-        veteranInfo = "No"
 
         submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
                     [codeInfo, educInfo, employInfo, genderInfo, stateInfo, livArangInfo, ethnicityInfo, raceInfo, marStatInfo, sapInfo, numhs]))

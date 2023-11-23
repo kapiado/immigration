@@ -168,11 +168,11 @@ def interface():
                        '92 - Public Administration']
         codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
 
-        education_levels = ["1", "2", "3", "4"]
-        educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select most appropriate prevailing wage level")
+        wage_levels = ["1", "2", "3", "4"]
+        wagelevelInfo = st.selectbox('Prevailing Wage Level', wage_levels, help = "Select most appropriate prevailing wage level")
 
-        employInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
-        ethnicities = [
+        wageamountInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
+        admiclasses = [
     "A-3", "A1/A2", "B-1", "B-2", "C-1", "C-3", "CW-1", "D-1", "D-2", 
     "E-1", "E-2", "E-3", "EWI", "F-1", "F-2", "G-1", "G-4", "G-5", 
     "H-1A", "H-1B", "H-1B1", "H-2A", "H-2B", "H-3", "H-4", "I", 
@@ -181,9 +181,9 @@ def interface():
     "R-1", "R-2", "T-1", "T-2", "TD", "TN", "TPS", "U-1", "V-2", 
     "VWB", "VWT"
 ]
-        ethnicityInfo = st.selectbox('Class of Admission', ethnicities)
+        admiclassInfo = st.selectbox('Class of Admission', admiclasses)
         
-        genderInfo = st.selectbox('Country of Citizenship', options=[
+        countryInfo = st.selectbox('Country of Citizenship', options=[
     "ARGENTINA", "AUSTRALIA", "BANGLADESH", "BELARUS", "BRAZIL", 
     "BULGARIA", "CANADA", "CHILE", "CHINA", "COLOMBIA", "ECUADOR", 
     "EGYPT", "FRANCE", "GERMANY", "GREECE", "HONG KONG", "INDIA", 
@@ -203,33 +203,38 @@ def interface():
                                                        "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"], 
                                  help = "Select the U.S. state of primary worksite")
 
-        livArangInfo = st.number_input('Employer Number of Employees', min_value = 0)
+        employeenumInfo = st.number_input('Employer Number of Employees', min_value = 0)
 
 
 
-        race_options = [
+        education_options = [
     "Associate's", "Bachelor's", "Doctorate", "High School", 
     "Master's", "None", "Other"
 ]
-        raceInfo = st.selectbox('Job Education', options=race_options)
+        # was job education -- how to address this since this is the education required by the job
+        educationInfo = st.selectbox('Highest Completed Education  Level', options=education_options) 
         
-        marStatInfo = st.radio('Experience', options=["Yes","No"])
+        expInfo = st.radio('Do you have job/industry experience?', options=["Yes","No"])
 
-        sapInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
+        if expInfo == "Yes":
+            expmonthsInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
+
+        elif expInfo == "No":
+            expmonthsInfo = 0
 
         #if sapInfo == "No":
             #sapInfo = "Yes"
         
-        numhs =  st.radio('Layoff in Past Six Months', options =["Yes","No"])
+        layoffInfo =  st.radio('Have you been affected from layoff(s) in the past six months?', options =["Yes","No"])
 
-        if numhs == "Yes":
-            numhs = "Y"
+        if layoffInfo == "Yes":
+            layoffInfo = "Y"
         elif numhs == "No":
-            numhs = "N"
+            layoffInfo = "N"
 
 
         submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
-                    [codeInfo, educInfo, employInfo, ethnicityInfo, genderInfo, stateInfo, livArangInfo,  raceInfo, marStatInfo, sapInfo, numhs]))
+                    [codeInfo, wagelevelInfo, wageamountInfo, admiclassInfo, countryInfo, stateInfo, employeenumInfo,  educationInfo, expInfo, expmonthsInfo, numhs]))
 
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 

@@ -128,10 +128,12 @@ def displayInput(Info):
 
 def interface():
     st.title("Estimate Your Green Card Application Wait Time")
-    st.caption("This predictive dashboard predicts the waiting time from the date the application was received by OFLC to the date a decision was made by OFLC for green card applicants. \n*OFLC = Office of Foreign Labor Certification")
+    st.caption("This predictive dashboard predicts the waiting time from the date the application was received by the U.S. Department of Labor's Office of Foreign Labor Certification (OFLC) to the date a decision was made by OFLC for green card applicants.")
+    # st.text("")
+    # st.caption("*OFLC = Office of Foreign Labor Certification")
     if 'stage' not in st.session_state:
         st.session_state.stage = 0
-        st.session_state.input = []
+        st.session_state.input = [] 
         st.session_state.ret = []
 
     def set_stage(stage, input):

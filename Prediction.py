@@ -217,9 +217,7 @@ def interface():
         expInfo = st.radio('Do you have job/industry experience?', options=["Yes","No"])
         
         expmonthsInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
-        if expInfo == "Yes":
-            expmonthsInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
-        else:
+        if expInfo == "No":
             expmonthsInfo = 0
 
         #if sapInfo == "No":

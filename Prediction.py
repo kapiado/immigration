@@ -219,7 +219,7 @@ def interface():
         if expInfo == "Yes":
             expmonthsInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
 
-        elif expInfo == "No":
+        else expInfo == "No":
             expmonthsInfo = 0
 
         #if sapInfo == "No":
@@ -229,7 +229,7 @@ def interface():
 
         if layoffInfo == "Yes":
             layoffInfo = "Y"
-        elif numhs == "No":
+        else numhs == "No":
             layoffInfo = "N"
 
 

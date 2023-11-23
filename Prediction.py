@@ -172,7 +172,17 @@ def interface():
         educInfo = st.selectbox('Prevailing Wage Level', education_levels, help = "Select most appropriate prevailing wage level")
 
         employInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
-
+        ethnicities = [
+    "A-3", "A1/A2", "B-1", "B-2", "C-1", "C-3", "CW-1", "D-1", "D-2", 
+    "E-1", "E-2", "E-3", "EWI", "F-1", "F-2", "G-1", "G-4", "G-5", 
+    "H-1A", "H-1B", "H-1B1", "H-2A", "H-2B", "H-3", "H-4", "I", 
+    "J-1", "J-2", "K-4", "L-1", "L-2", "M-1", "M-2", "N", "Not in USA", 
+    "O-1", "O-2", "O-3", "P-1", "P-3", "P-4", "Parolee", "Q", 
+    "R-1", "R-2", "T-1", "T-2", "TD", "TN", "TPS", "U-1", "V-2", 
+    "VWB", "VWT"
+]
+        ethnicityInfo = st.selectbox('Class of Admission', ethnicities)
+        
         genderInfo = st.selectbox('Country of Citizenship', options=[
     "ARGENTINA", "AUSTRALIA", "BANGLADESH", "BELARUS", "BRAZIL", 
     "BULGARIA", "CANADA", "CHILE", "CHINA", "COLOMBIA", "ECUADOR", 
@@ -195,16 +205,7 @@ def interface():
 
         livArangInfo = st.number_input('Employer Number of Employees', min_value = 0)
 
-        ethnicities = [
-    "A-3", "A1/A2", "B-1", "B-2", "C-1", "C-3", "CW-1", "D-1", "D-2", 
-    "E-1", "E-2", "E-3", "EWI", "F-1", "F-2", "G-1", "G-4", "G-5", 
-    "H-1A", "H-1B", "H-1B1", "H-2A", "H-2B", "H-3", "H-4", "I", 
-    "J-1", "J-2", "K-4", "L-1", "L-2", "M-1", "M-2", "N", "Not in USA", 
-    "O-1", "O-2", "O-3", "P-1", "P-3", "P-4", "Parolee", "Q", 
-    "R-1", "R-2", "T-1", "T-2", "TD", "TN", "TPS", "U-1", "V-2", 
-    "VWB", "VWT"
-]
-        ethnicityInfo = st.selectbox('Class of Admission', ethnicities)
+
 
         race_options = [
     "Associate's", "Bachelor's", "Doctorate", "High School", 
@@ -228,7 +229,7 @@ def interface():
 
 
         submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
-                    [codeInfo, educInfo, employInfo, genderInfo, stateInfo, livArangInfo, ethnicityInfo, raceInfo, marStatInfo, sapInfo, numhs]))
+                    [codeInfo, educInfo, employInfo, ethnicityInfo, genderInfo, stateInfo, livArangInfo,  raceInfo, marStatInfo, sapInfo, numhs]))
 
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 

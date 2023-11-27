@@ -53,7 +53,8 @@ def displayPrediction(cluster, query, probs):
 
 def process(query):
     Info = query
-    df = pd.read_csv('CSV_files/dummieCodex.csv')
+    # df = pd.read_csv('CSV_files/dummieCodes.csv')
+    df = pd.read_csv('dummieCodes.csv')
 
     # replace each row with its mode
     df = modes('NAICS_CODE', df)
@@ -104,7 +105,8 @@ def process(query):
     zeros = np.zeros((1, 10), dtype=int)
     row = np.concatenate((row, zeros), axis=1)
 
-    loaded_model = joblib.load("pkl_files/dt_clustered_modes.sav")
+    # loaded_model = joblib.load("pkl_files/dt_clustered_modes.sav")
+    loaded_model = joblib.load("NEWrf_model3_11_21_23.sav")
 
     y_predicted = loaded_model.predict(row)
     cluster = y_predicted[0]

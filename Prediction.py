@@ -230,8 +230,6 @@ def interface():
         # was job education -- how to address this since this is the education required by the job
         jobeducationInfo = st.selectbox('Education Level Required by Job', options=jobeducation_options) 
 
-
-        
         expInfo = st.radio('Do you have job/industry experience?', options=["Yes","No"])
         
         expmonthsInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
@@ -260,9 +258,9 @@ def interface():
         headers =  ['NAICS Code','Education Level','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Education Required by Job','Employer Number of Employees','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):
-            df = pd.DataFrame(data, columns = ['Question','Answer'])
             data['Question'] = headers
             data['Answer'] = smt
+            df = pd.DataFrame(data, columns = ['Question','Answer'])
             
         with st.container():
             st.table(df.set_index('Question').T)

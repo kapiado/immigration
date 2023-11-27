@@ -118,7 +118,9 @@ def process(query):
 
 
 def displayInput(Info):
-        headers = ['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Work State','Country of Citizenship','Employer Number of Employees','Class of Admission','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
+        headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+    #['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Work State','Country of Citizenship','Employer Number of Employees','Class of Admission','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
         #query = [Info[0], Info[1], Info[6], Info[7], Info[3], Info[8], Info[9], Info[2], Info[5], Info[10], Info[4]]
 
         df_query = pd.DataFrame(columns=headers)

@@ -3,6 +3,7 @@
 
 # Import libraries
 import streamlit as st
+import pandas as pd
 import pickle
 def displayPrediction(cluster, query, probs):
     st.title("Prediction Results")

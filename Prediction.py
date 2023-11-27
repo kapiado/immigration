@@ -46,9 +46,9 @@ def displayPrediction(cluster, query, probs):
             'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
         data = {}
         for i in range(len(headers)):
+            df = pd.DataFrame(data, columns = ['Question','Answer'])
             data['Question'] = headers
             data['Answer'] = smt
-            df = pd.DataFrame(data)
         with st.container():
             st.table(df.set_index('Question').T)
 
@@ -101,7 +101,7 @@ def process(query):
     df.loc[0] = first_row
     df_codex = df.reset_index(drop=True)
 
-    x = pd.get_dummies(df_codex.drop(columns = ['MH1']), drop_first = True)
+    x = pd.get_dummies(df_codex.drop(columns = ['WAITING_TIMERANGE']), drop_first = True)
     row = np.array(x.iloc[0]).reshape(1, -1)
     zeros = np.zeros((1, 10), dtype=int)
     row = np.concatenate((row, zeros), axis=1)

@@ -178,7 +178,13 @@ def interface():
                        '81 - Other Services (except Public Administration)',
                        '92 - Public Administration']
         codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
-
+        education_options = [
+    "High School", "Associate's", "Bachelor's", "Doctorate", 
+    "Master's", "None", "Other"
+]
+        # was job education -- how to address this since this is the education required by the job
+        educationInfo = st.selectbox('Highest Completed Education Level', options=education_options) 
+        
         wage_levels = ["1", "2", "3", "4"]
         wagelevelInfo = st.selectbox('Prevailing Wage Level', wage_levels, help = "Select most appropriate prevailing wage level")
 
@@ -224,12 +230,7 @@ def interface():
         # was job education -- how to address this since this is the education required by the job
         jobeducationInfo = st.selectbox('Education Level Required by Job', options=jobeducation_options) 
 
-        education_options = [
-    "High School", "Associate's", "Bachelor's", "Doctorate", 
-    "Master's", "None", "Other"
-]
-        # was job education -- how to address this since this is the education required by the job
-        educationInfo = st.selectbox('Highest Completed Education Level', options=education_options) 
+
         
         expInfo = st.radio('Do you have job/industry experience?', options=["Yes","No"])
         

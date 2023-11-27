@@ -247,7 +247,7 @@ def interface():
 
     if st.session_state.stage > 0:
         Info = st.session_state.input
-        smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11]]
+        smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10]]
         headers =  ['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Employer Number of Employees','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):
@@ -260,7 +260,7 @@ def interface():
 
     # def executeQuery(Info)
     def executeQuery():
-        query = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11]]
+        query = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10]]
         #st.text('Thank you!')
         process(query)
 

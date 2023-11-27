@@ -229,7 +229,7 @@ def interface():
     "Master's", "None", "Other"
 ]
         # was job education -- how to address this since this is the education required by the job
-        educationInfo = st.selectbox('Highest Completed Education  Level', options=education_options) 
+        educationInfo = st.selectbox('Highest Completed Education Level', options=education_options) 
         
         expInfo = st.radio('Do you have job/industry experience?', options=["Yes","No"])
         
@@ -255,7 +255,7 @@ def interface():
 
     if st.session_state.stage > 0:
         Info = st.session_state.input
-        smt = [Info[0], Info[11], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[1]]
+        smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11]]
         headers =  ['NAICS Code','Education Level','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Education Required by Job','Employer Number of Employees','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):

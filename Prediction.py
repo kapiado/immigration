@@ -217,6 +217,12 @@ def interface():
         employeenumInfo = st.number_input('Employer Number of Employees', min_value = 0)
 
 
+        jobeducation_options = [
+    "High School", "Associate's", "Bachelor's", "Doctorate", 
+    "Master's", "None", "Other"
+]
+        # was job education -- how to address this since this is the education required by the job
+        jobeducationInfo = st.selectbox('Education Level Required by Job', options=jobeducation_options) 
 
         education_options = [
     "High School", "Associate's", "Bachelor's", "Doctorate", 
@@ -243,14 +249,14 @@ def interface():
 
 
         submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
-                    [codeInfo, wagelevelInfo, wageamountInfo, admiclassInfo, countryInfo, stateInfo, employeenumInfo,  educationInfo, expInfo, expmonthsInfo, layoffInfo]))
+                    [codeInfo, educationInfo, wagelevelInfo, wageamountInfo, admiclassInfo, countryInfo, stateInfo, jobeducationInfo, employeenumInfo,  expInfo, expmonthsInfo, layoffInfo]))
 
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 
     if st.session_state.stage > 0:
         Info = st.session_state.input
         smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11]]
-        headers =  ['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Employer Number of Employees','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
+        headers =  ['NAICS Code','Education Level','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Education Required by Job','Employer Number of Employees','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):
             df = pd.DataFrame(data, columns = ['Question','Answer'])

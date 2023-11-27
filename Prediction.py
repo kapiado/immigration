@@ -55,7 +55,7 @@ def displayPrediction(cluster, query, probs):
 def process(query):
     Info = query
     # df = pd.read_csv('CSV_files/dummieCodes.csv')
-    df = pd.read_csv('dummieCodes.csv')
+    df = pd.read_csv('dummieCodex.csv')
 
     # replace each row with its mode
     df = modes('NAICS_CODE', df)

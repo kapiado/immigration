@@ -251,9 +251,10 @@ def interface():
         headers =  ['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Employer Number of Employees','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):
+            df = pd.DataFrame(data, columns = ['Question','Answer'])
             data['Question'] = headers
             data['Answer'] = smt
-            df = pd.DataFrame(data)
+            
         with st.container():
             st.table(df.set_index('Question').T)
 

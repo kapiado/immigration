@@ -24,7 +24,7 @@ def displayPrediction(cluster, query, probs):
     ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
 
     # waiting time here
-    df = pd.DataFrame.from_dict(keys, orient='index', columns=['Waiting Time Range'])
+    df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
     df.index.name = 'Cluster'
 
     sorted_probs = sorted(map(int, probs_dict.keys()))

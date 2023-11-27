@@ -225,8 +225,7 @@ def interface():
 
         jobeducation_options = [
     "High School", "Associate's", "Bachelor's", "Doctorate", 
-    "Master's", "None", "Other"
-]
+    "Master's", "None", "Other"] 
         # was job education -- how to address this since this is the education required by the job
         jobeducationInfo = st.selectbox('Education Level Required by Job', options=jobeducation_options) 
 

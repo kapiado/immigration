@@ -47,9 +47,9 @@ def displayPrediction(cluster, query, probs):
             'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
         data = {}
         for i in range(len(headers)):
-            df = pd.DataFrame(data, columns = ['Question','Answer'])
             data['Question'] = headers
             data['Answer'] = smt
+            df = pd.DataFrame(data)
         with st.container():
             st.table(df.set_index('Question').T)
 
@@ -60,6 +60,7 @@ def process(query):
 
     # replace each row with its mode
     df = modes('NAICS_CODE', df)
+    df = modes('WORKER_EDUCATION', df)
     df = modes('PW_LEVEL', df)
     df = modes('PW_AMOUNT', df)
     df = modes('WORK_STATE', df)
@@ -70,10 +71,10 @@ def process(query):
     df = modes('EXPERIENCE', df)
     df = modes('EXPERIENCE_MONTHS', df)
     df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
-    df = modes('WORKER_EDUCATION', df)
 
-    headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+
+    headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
 
     df_query = pd.DataFrame(columns=headers)
     df_query.loc[0] = query
@@ -86,6 +87,7 @@ def process(query):
         return df_query
 
     df_query = more('NAICS_CODE', df_query)
+    df_query = more('WORKER_EDUCATION', df_query)
     df_query = more('PW_LEVEL', df_query)
     df_query = more('PW_AMOUNT', df_query)
     df_query = more('WORK_STATE', df_query)
@@ -96,7 +98,6 @@ def process(query):
     df_query = more('EXPERIENCE', df_query)
     df_query = more('EXPERIENCE_MONTHS', df_query)
     df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
-    df_query = more('WORKER_EDUCATION', df_query)
 
     first_row = df_query.iloc[0].copy()
     df.loc[0] = first_row
@@ -118,8 +119,8 @@ def process(query):
 
 
 def displayInput(Info):
-        headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+        headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
     #['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Work State','Country of Citizenship','Employer Number of Employees','Class of Admission','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
         #query = [Info[0], Info[1], Info[6], Info[7], Info[3], Info[8], Info[9], Info[2], Info[5], Info[10], Info[4]]
 
@@ -253,13 +254,13 @@ def interface():
 
     if st.session_state.stage > 0:
         Info = st.session_state.input
-        smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11],Info[12]]
+        smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11], Info[12]]
         headers =  ['NAICS Code','Education Level','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Education Required by Job','Employer Number of Employees','Experience','Months of Experience','Layoff in Past Six Months','Education']
         data = {}
         for i in range(len(headers)):
             data['Question'] = headers
             data['Answer'] = smt
-            df = pd.DataFrame(data, columns = ['Question','Answer'])
+            df = pd.DataFrame(data)
             
         with st.container():
             st.table(df.set_index('Question').T)

@@ -5,6 +5,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import joblib
 def displayPrediction(cluster, query, probs):
     st.title("Prediction Results")
     cluster = str(int(float(cluster)))

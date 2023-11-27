@@ -146,7 +146,7 @@ def interface():
 
     def set_stage(stage, input):
         st.session_state.stage = stage
-        st.session_state.input= input
+        st.session_state.input = input
 
         interface()
         #displayInput(input)

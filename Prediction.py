@@ -14,15 +14,15 @@ def displayPrediction(cluster, query, probs):
     probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
 
     keys = {
-        "0": 'ADHD, Anxiety, Conduct Disorder, Delirium, Substance Abuse, Dementia, Oppositional Defiant Disorder, Other, Personality Disorder, Pervasive Developmental Disorder, Trauma-Related',
-        "1": 'Bipolar, Depression',
-        "2": 'Schizophrenia/psychotic'
+        "1": '0-9m', #0
+        "2": '9m+'
     }
 
     sorted_keys = sorted(map(int, keys.keys()))
     ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
 
-    df = pd.DataFrame.from_dict(keys, orient='index', columns=['Disorders'])
+    # waiting time here
+    df = pd.DataFrame.from_dict(keys, orient='index', columns=['Waiting Time Range'])
     df.index.name = 'Cluster'
 
     sorted_probs = sorted(map(int, probs_dict.keys()))

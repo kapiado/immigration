@@ -5,7 +5,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import joblib
 def displayPrediction(cluster, query, probs):
     st.title("Prediction Results")
     cluster = str(int(float(cluster)))
@@ -54,66 +53,91 @@ def displayPrediction(cluster, query, probs):
             st.table(df.set_index('Question').T)
 
 def process(query):
-    Info = query
-    # df = pd.read_csv('CSV_files/dummieCodes.csv')
-    df = pd.read_csv('dummieCodex.csv')
-
-    # replace each row with its mode
-    df = modes('NAICS_CODE', df)
-    df = modes('WORKER_EDUCATION', df)
-    df = modes('PW_LEVEL', df)
-    df = modes('PW_AMOUNT', df)
-    df = modes('WORK_STATE', df)
-    df = modes('COUNTRY_OF_CITIZENSHIP', df)
-    df = modes('EMPLOYER_NUM_EMPLOYEES', df)
-    df = modes('CLASS_OF_ADMISSION', df)
-    df = modes('JOB_EDUCATION', df)
-    df = modes('EXPERIENCE', df)
-    df = modes('EXPERIENCE_MONTHS', df)
-    df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
+    df2 = pd.read_csv("11_30_23_Pred_Data_Final1.csv")
+    df2 = df2.drop(columns = ['WAITING_TIMERANGE'])
 
 
-    headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
+    # Loading model and mapping pickle files
+    dt_pickle = open('11_30_23_rf_model_final.sav', 'rb') 
+    dt_model = pickle.load(dt_pickle) 
+    dt_pickle.close() 
 
-    df_query = pd.DataFrame(columns=headers)
-    df_query.loc[0] = query
+    df3 = df2.copy()
+    df3.loc[len(df3)] = [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
+    # Create dummies for encode_df
+    cat_var = ['NAICS_CODE', 'PW_LEVEL','WORK_STATE','COUNTRY_OF_CITIZENSHIP','CLASS_OF_ADMISSION','JOB_EDUCATION','EXPERIENCE','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+    df3 = pd.get_dummies(df3, columns = cat_var)
+    # Extract encoded user data
+    user_encoded_df = df3.tail(1)
 
-    def more(column, df_query):
-        new_col = column + '_replaced'
-        df_query[new_col] = False
+    st.subheader("Predicting Waiting Time")
 
-        df_query[new_col] = df_query.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
-        return df_query
+    new_prediction_dt = dt_model.predict(user_encoded_df)
+    new_prediction_prob_dt = dt_model.predict_proba(user_encoded_df).max()
+    # Show the predicted cost range on the app
+    st.write("Random Forest Prediction: {}".format(*new_prediction_dt))
+    st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
 
-    df_query = more('NAICS_CODE', df_query)
-    df_query = more('WORKER_EDUCATION', df_query)
-    df_query = more('PW_LEVEL', df_query)
-    df_query = more('PW_AMOUNT', df_query)
-    df_query = more('WORK_STATE', df_query)
-    df_query = more('COUNTRY_OF_CITIZENSHIP', df_query)
-    df_query = more('EMPLOYER_NUM_EMPLOYEES', df_query)
-    df_query = more('CLASS_OF_ADMISSION', df_query)
-    df_query = more('JOB_EDUCATION', df_query)
-    df_query = more('EXPERIENCE', df_query)
-    df_query = more('EXPERIENCE_MONTHS', df_query)
-    df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
+    # Info = query
+    # # df = pd.read_csv('CSV_files/dummieCodes.csv')
+    # df = pd.read_csv('dummieCodex.csv')
 
-    first_row = df_query.iloc[0].copy()
-    df.loc[0] = first_row
-    df_codex = df.reset_index(drop=True)
+    # # replace each row with its mode
+    # df = modes('NAICS_CODE', df)
+    # df = modes('WORKER_EDUCATION', df)
+    # df = modes('PW_LEVEL', df)
+    # df = modes('PW_AMOUNT', df)
+    # df = modes('WORK_STATE', df)
+    # df = modes('COUNTRY_OF_CITIZENSHIP', df)
+    # df = modes('EMPLOYER_NUM_EMPLOYEES', df)
+    # df = modes('CLASS_OF_ADMISSION', df)
+    # df = modes('JOB_EDUCATION', df)
+    # df = modes('EXPERIENCE', df)
+    # df = modes('EXPERIENCE_MONTHS', df)
+    # df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
 
-    x = pd.get_dummies(df_codex.drop(columns = ['WAITING_TIMERANGE']), drop_first = True)
-    row = np.array(x.iloc[0]).reshape(1, -1)
-    zeros = np.zeros((1, 10), dtype=int)
-    row = np.concatenate((row, zeros), axis=1)
 
-    # loaded_model = joblib.load("pkl_files/dt_clustered_modes.sav")
-    loaded_model = joblib.load("NEWrf_model3_11_21_23.sav")
+    # headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+    #         'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
 
-    y_predicted = loaded_model.predict(row)
-    cluster = y_predicted[0]
-    probs = loaded_model.predict_proba(row)
+    # df_query = pd.DataFrame(columns=headers)
+    # df_query.loc[0] = query
+
+    # def more(column, df_query):
+    #     new_col = column + '_replaced'
+    #     df_query[new_col] = False
+
+    #     df_query[new_col] = df_query.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
+    #     return df_query
+
+    # df_query = more('NAICS_CODE', df_query)
+    # df_query = more('WORKER_EDUCATION', df_query)
+    # df_query = more('PW_LEVEL', df_query)
+    # df_query = more('PW_AMOUNT', df_query)
+    # df_query = more('WORK_STATE', df_query)
+    # df_query = more('COUNTRY_OF_CITIZENSHIP', df_query)
+    # df_query = more('EMPLOYER_NUM_EMPLOYEES', df_query)
+    # df_query = more('CLASS_OF_ADMISSION', df_query)
+    # df_query = more('JOB_EDUCATION', df_query)
+    # df_query = more('EXPERIENCE', df_query)
+    # df_query = more('EXPERIENCE_MONTHS', df_query)
+    # df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
+
+    # first_row = df_query.iloc[0].copy()
+    # df.loc[0] = first_row
+    # df_codex = df.reset_index(drop=True)
+
+    # x = pd.get_dummies(df_codex.drop(columns = ['WAITING_TIMERANGE']), drop_first = True)
+    # row = np.array(x.iloc[0]).reshape(1, -1)
+    # zeros = np.zeros((1, 10), dtype=int)
+    # row = np.concatenate((row, zeros), axis=1)
+
+    # # loaded_model = joblib.load("pkl_files/dt_clustered_modes.sav")
+    # loaded_model = joblib.load("NEWrf_model3_11_21_23.sav")
+
+    # y_predicted = loaded_model.predict(row)
+    # cluster = y_predicted[0]
+    # probs = loaded_model.predict_proba(row)
 
     displayPrediction(cluster, query, probs)
 
@@ -178,17 +202,23 @@ def interface():
                        '72 - Accommodation and Food Services',
                        '81 - Other Services (except Public Administration)',
                        '92 - Public Administration']
-        codeInfo = st.selectbox('NAICS Code', codeOptions, help = "Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
+        
+    
+    # To get the selected value from the select box
+        codeInfo = st.selectbox('NAICS Code', codeOptions, help="Select most appropriate Industry Code as found here https://www.census.gov/naics/?58967?yearbck=2022")
+    
+        # Initialize variables for NAICS Codes
+    # Assign numerical values based on specific strings in the NAICS Code
         education_options = [
     "High School", "Associate's", "Bachelor's", "Doctorate", 
     "Master's", "None", "Other"
-]
+    ]
         # was job education -- how to address this since this is the education required by the job
         educationInfo = st.selectbox('Highest Completed Education Level', options=education_options) 
         
-        wage_levels = ["1", "2", "3", "4"]
+        wage_levels = ["Level I", "Level II", "Level III", "Level IV"]
         wagelevelInfo = st.selectbox('Prevailing Wage Level', wage_levels, help = "Select most appropriate prevailing wage level")
-
+    
         wageamountInfo = st.number_input('Prevailing Wage Amount', min_value = 0)
         admiclasses = [
     "A-3", "A1/A2", "B-1", "B-2", "C-1", "C-3", "CW-1", "D-1", "D-2", 
@@ -198,7 +228,8 @@ def interface():
     "O-1", "O-2", "O-3", "P-1", "P-3", "P-4", "Parolee", "Q", 
     "R-1", "R-2", "T-1", "T-2", "TD", "TN", "TPS", "U-1", "V-2", 
     "VWB", "VWT"
-]
+    ]
+    
         admiclassInfo = st.selectbox('Class of Admission', admiclasses)
         
         countryInfo = st.selectbox('Country of Citizenship', options=[
@@ -211,44 +242,40 @@ def interface():
     "RUSSIA", "SINGAPORE", "SOUTH AFRICA", "SOUTH KOREA", "SPAIN", 
     "SRI LANKA", "SWEDEN", "SYRIA", "TAIWAN", "THAILAND", "TURKEY", 
     "UKRAINE", "UNITED KINGDOM", "VENEZUELA", "VIETNAM"
-])
-
+    ])
+    
         stateInfo = st.selectbox('U.S. Work State',
-                                                      ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-                                                       "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-                                                       "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-                                                       "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
-                                                       "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"], 
+                                                      [
+        'ALABAMA', 'ALASKA', 'ARIZONA', 'ARKANSAS', 'CALIFORNIA', 'COLORADO', 'CONNECTICUT', 'DELAWARE',
+        'DISTRICT OF COLUMBIA', 'FLORIDA', 'GEORGIA', 'GUAM', 'HAWAII', 'IDAHO', 'ILLINOIS', 'INDIANA',
+        'IOWA', 'KANSAS', 'KENTUCKY', 'LOUISIANA', 'MAINE', 'MARSHALL ISLANDS', 'MARYLAND', 'MASSACHUSETTS',
+        'MICHIGAN', 'MINNESOTA', 'MISSISSIPPI', 'MISSOURI', 'MONTANA', 'NEBRASKA', 'NEVADA', 'NEW HAMPSHIRE',
+        'NEW JERSEY', 'NEW MEXICO', 'NEW YORK', 'NORTH CAROLINA', 'NORTH DAKOTA', 'NORTHERN MARIANA ISLANDS',
+        'OHIO', 'OKLAHOMA', 'OREGON', 'PENNSYLVANIA', 'PUERTO RICO', 'RHODE ISLAND', 'SOUTH CAROLINA',
+        'SOUTH DAKOTA', 'TENNESSEE', 'TEXAS', 'UTAH', 'VERMONT', 'VIRGIN ISLANDS', 'VIRGINIA', 'WASHINGTON',
+        'WEST VIRGINIA', 'WISCONSIN', 'WYOMING'
+    ], 
                                  help = "Select the U.S. state of primary worksite")
-
-        employeenumInfo = st.number_input('Employer Number of Employees', min_value = 0)
-
-
+    
+        employeenumInfo = st.number_input('Number of Employees at Company', min_value = 0)
+    
+    
         jobeducation_options = [
     "High School", "Associate's", "Bachelor's", "Doctorate", 
     "Master's", "None", "Other"] 
         # was job education -- how to address this since this is the education required by the job
         jobeducationInfo = st.selectbox('Education Level Required by Job', options=jobeducation_options) 
-
+    
         expInfo = st.radio('Do you have job/industry experience?', options=["Yes","No"])
         
         expmonthsInfo = st.number_input('Months of Experience', min_value = 0, help = "Input how many months of job experience you have")
-        if expInfo == "No":
-            expmonthsInfo = 0
-
-        #if sapInfo == "No":
-            #sapInfo = "Yes"
         
         layoffInfo =  st.radio('Have you been affected from layoff(s) in the past six months?', options =["Yes","No"])
-
-        if layoffInfo == "Yes":
-            layoffInfo = "Y"
-        else:
-            layoffInfo = "N"
-
-
-        submit = st.form_submit_button('Submit', on_click=set_stage, args=(1,
-                    [codeInfo, educationInfo, wagelevelInfo, wageamountInfo, admiclassInfo, countryInfo, stateInfo, jobeducationInfo, employeenumInfo,  expInfo, expmonthsInfo, layoffInfo]))
+    
+    
+    
+        submit = st.form_submit_button('Submit', args=(1,
+                        [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]))
 
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 

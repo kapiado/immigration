@@ -301,7 +301,7 @@ def interface():
             st.table(df.set_index('Question').T)
 
     # def executeQuery(Info)
-    def executeQuery():
+    def executeQuery(Info):
         query = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
         #st.text('Thank you!')
         process(query)

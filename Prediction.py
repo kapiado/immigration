@@ -5,7 +5,16 @@
 import streamlit as st
 import pandas as pd
 import pickle
-def displayPrediction(cluster, query, probs):
+
+def modes(column, df_modes):
+        new_col = column + '_replaced'
+        df_modes[new_col] = False
+        mode = df_modes[column].mode()
+        #print(mode[0])
+        df_modes[column] = df_modes.apply(lambda row: mode[0] if pd.isna(row[column]) else row[column], axis = 1)
+        df_modes[new_col] = df_modes.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
+        return df_modes
+# def displayPrediction(cluster, query, probs):
 
     # st.title("Prediction Results")
     # cluster = str(int(float(cluster)))
@@ -41,17 +50,17 @@ def displayPrediction(cluster, query, probs):
     # st.dataframe(df)
     # highlight_row(df, cluster)
 
-    with st.expander("View Input"):
-        smt = query
-        headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
-        data = {}
-        for i in range(len(headers)):
-            data['Question'] = headers
-            data['Answer'] = smt
-            df = pd.DataFrame(data)
-        with st.container():
-            st.table(df.set_index('Question').T)
+    # with st.expander("View Input"):
+    #     smt = query
+    #     headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+    #         'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+    #     data = {}
+    #     for i in range(len(headers)):
+    #         data['Question'] = headers
+    #         data['Answer'] = smt
+    #         df = pd.DataFrame(data)
+    #     with st.container():
+    #         st.table(df.set_index('Question').T)
 
 def process(query):
     Info = query

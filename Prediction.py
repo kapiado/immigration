@@ -281,8 +281,9 @@ def interface():
 
     if st.session_state.stage > 0:
         Info = st.session_state.input
-        smt = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11]]
-        headers =  ['NAICS Code','Education Level','Prevailing Wage Level','Prevailing Wage Amount','Class of Admission','Country of Citizenship','Work State','Education Required by Job','Employer Number of Employees','Experience','Months of Experience','Layoff in Past Six Months']
+        smt = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
+        # codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
+        headers =  ['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Work State','Country of Citizenship','Employer Number of Employees','Class of Admission','Education Required by Job','Experience','Months of Experience','Layoff in Past Six Months', 'Education Level']
         data = {}
         for i in range(len(headers)):
             data['Question'] = headers
@@ -294,7 +295,7 @@ def interface():
 
     # def executeQuery(Info)
     def executeQuery():
-        query = [Info[0], Info[1], Info[2], Info[3], Info[4], Info[5], Info[6], Info[7], Info[8], Info[9], Info[10], Info[11]]
+        query = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
         #st.text('Thank you!')
         process(query)
 

@@ -127,7 +127,7 @@ def process(query):
     st.write("Random Forest Prediction: {}".format(*new_prediction_dt))
     st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
     
-    displayPrediction(cluster, query, new_prediction_prob_dt)
+    #displayPrediction(cluster, query, new_prediction_prob_dt)
 
 
     # Info = query

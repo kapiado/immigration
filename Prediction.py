@@ -5,53 +5,53 @@
 import streamlit as st
 import pandas as pd
 import pickle
-# def displayPrediction(cluster, query, probs):
+def displayPrediction(cluster, query, probs):
 
-    # st.title("Prediction Results")
-    # cluster = str(int(float(cluster)))
-    # st.write("")
-    # st.write("")
-    # st.subheader("Decision Tree Classification: Cluster " + cluster)
+    st.title("Prediction Results")
+    cluster = str(int(float(cluster)))
+    st.write("")
+    st.write("")
+    st.subheader("Decision Tree Classification: Cluster " + cluster)
 
-    # probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
+    probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
 
-    # keys = {
-    #     "1": '0-9m', #0
-    #     "2": '9m+'
-    # }
+    keys = {
+        "1": '0-6m', #0
+        "2": '6m+'
+    }
 
-    # sorted_keys = sorted(map(int, keys.keys()))
-    # ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
+    sorted_keys = sorted(map(int, keys.keys()))
+    ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
 
-    # # waiting time here
-    # df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
-    # df.index.name = 'Cluster'
+    # waiting time here
+    df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
+    df.index.name = 'Cluster'
 
-    # sorted_probs = sorted(map(int, probs_dict.keys()))
-    # ordered_probs = {str(key): probs_dict[str(key)] for key in sorted_probs}
+    sorted_probs = sorted(map(int, probs_dict.keys()))
+    ordered_probs = {str(key): probs_dict[str(key)] for key in sorted_probs}
 
-    # cluster_values = [ordered_probs[str(i)] for i in range(len(ordered_probs))]
-    # cluster_values = cluster_values[0]
-    # df['Probability'] = cluster_values
+    cluster_values = [ordered_probs[str(i)] for i in range(len(ordered_probs))]
+    cluster_values = cluster_values[0]
+    df['Probability'] = cluster_values
 
-    # df['Probability'] = df['Probability'].apply(lambda x: float(x) * 100)
-    # df['Probability'] = df['Probability'].apply(lambda x: format(x, '.2f') + '%')
+    df['Probability'] = df['Probability'].apply(lambda x: float(x) * 100)
+    df['Probability'] = df['Probability'].apply(lambda x: format(x, '.2f') + '%')
 
 
-    #st.dataframe(df)
-    # highlight_row(df, cluster)
+    st.dataframe(df)
+    highlight_row(df, cluster)
 
-    # with st.expander("View Input"):
-    #     smt = query
-    #     headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-    #         'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
-    #     data = {}
-    #     for i in range(len(headers)):
-    #         data['Question'] = headers
-    #         data['Answer'] = smt
-    #         df = pd.DataFrame(data)
-    #     with st.container():
-    #         st.table(df.set_index('Question').T)
+    with st.expander("View Input"):
+        smt = query
+        headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+        data = {}
+        for i in range(len(headers)):
+            data['Question'] = headers
+            data['Answer'] = smt
+            df = pd.DataFrame(data)
+        with st.container():
+            st.table(df.set_index('Question').T)
 
 def process(query):
     Info = query
@@ -121,11 +121,13 @@ def process(query):
 
     st.subheader("Predicting Waiting Time")
     new_prediction_dt = dt_model.predict(user_encoded_df)
+    cluster = new_prediction_df[0]
     new_prediction_prob_dt = dt_model.predict_proba(user_encoded_df).max()
     # Show the predicted cost range on the app
     st.write("Random Forest Prediction: {}".format(*new_prediction_dt))
     st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
-
+    
+    displayPrediction(cluster, query, new_prediction_prob_dt)
 
 
     # Info = query
@@ -144,7 +146,7 @@ def process(query):
     # cluster = y_predicted[0]
     # probs = loaded_model.predict_proba(row)
 
-    #displayPrediction(cluster, query, probs)
+
 
 
 def displayInput(Info):

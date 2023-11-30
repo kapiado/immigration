@@ -303,10 +303,10 @@ def interface():
         with st.container():
             st.table(df.set_index('Question').T)
 
-        st.button('View Prediction', on_click=executeQuery(Info), args=(st.session_state.input, ))
+        st.button('View Prediction', on_click=executeQuery(smt), args=(st.session_state.input, ))
 
     # def executeQuery(Info)
-    def executeQuery(Info):
+    def executeQuery(query):
         query = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
         #st.text('Thank you!')
         df2 = pd.read_csv("11_30_23_Pred_Data_Final1.csv")

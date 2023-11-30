@@ -5,7 +5,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-def displayPrediction(cluster, query, probs):
+# def displayPrediction(cluster, query, probs):
 
     # st.title("Prediction Results")
     # cluster = str(int(float(cluster)))
@@ -39,19 +39,19 @@ def displayPrediction(cluster, query, probs):
 
 
     #st.dataframe(df)
-    highlight_row(df, cluster)
+    # highlight_row(df, cluster)
 
-    with st.expander("View Input"):
-        smt = query
-        headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
-        data = {}
-        for i in range(len(headers)):
-            data['Question'] = headers
-            data['Answer'] = smt
-            df = pd.DataFrame(data)
-        with st.container():
-            st.table(df.set_index('Question').T)
+    # with st.expander("View Input"):
+    #     smt = query
+    #     headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+    #         'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+    #     data = {}
+    #     for i in range(len(headers)):
+    #         data['Question'] = headers
+    #         data['Answer'] = smt
+    #         df = pd.DataFrame(data)
+    #     with st.container():
+    #         st.table(df.set_index('Question').T)
 
 def process(query):
     Info = query
@@ -144,7 +144,7 @@ def process(query):
     # cluster = y_predicted[0]
     # probs = loaded_model.predict_proba(row)
 
-    displayPrediction(cluster, query, probs)
+    #displayPrediction(cluster, query, probs)
 
 
 def displayInput(Info):

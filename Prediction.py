@@ -6,14 +6,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-def modes(column, df_modes):
-        new_col = column + '_replaced'
-        df_modes[new_col] = False
-        mode = df_modes[column].mode()
-        #print(mode[0])
-        df_modes[column] = df_modes.apply(lambda row: mode[0] if pd.isna(row[column]) else row[column], axis = 1)
-        df_modes[new_col] = df_modes.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
-        return df_modes
+
 # def displayPrediction(cluster, query, probs):
 
     # st.title("Prediction Results")
@@ -343,4 +336,4 @@ def interface():
         #process(query)
 
     if st.session_state.stage > 0:
-        st.button('View Prediction', on_click=executeQuery, args=(st.session_state.input, ))
+        st.button('View Prediction', on_click=executeQuery(Info), args=(st.session_state.input, ))

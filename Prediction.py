@@ -325,8 +325,6 @@ def interface():
         dt_model = pickle.load(dt_pickle) 
         dt_pickle.close() 
         
-        
-        
         st.subheader("Predicting Waiting Time")
         new_prediction_dt = dt_model.predict(user_encoded_df)
         cluster = new_prediction_df[0]

@@ -303,6 +303,8 @@ def interface():
         with st.container():
             st.table(df.set_index('Question').T)
 
+        st.button('View Prediction', on_click=executeQuery(Info), args=(st.session_state.input, ))
+
     # def executeQuery(Info)
     def executeQuery(Info):
         query = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
@@ -335,5 +337,5 @@ def interface():
     
         #process(query)
 
-    if st.session_state.stage > 0:
-        st.button('View Prediction', on_click=executeQuery(Info), args=(st.session_state.input, ))
+    # if st.session_state.stage > 0:
+        

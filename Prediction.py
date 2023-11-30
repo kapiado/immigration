@@ -7,39 +7,39 @@ import pandas as pd
 import pickle
 def displayPrediction(cluster, query, probs):
 
-    st.title("Prediction Results")
-    cluster = str(int(float(cluster)))
-    st.write("")
-    st.write("")
-    st.subheader("Decision Tree Classification: Cluster " + cluster)
+    # st.title("Prediction Results")
+    # cluster = str(int(float(cluster)))
+    # st.write("")
+    # st.write("")
+    # st.subheader("Decision Tree Classification: Cluster " + cluster)
 
-    probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
+    # probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
 
-    keys = {
-        "1": '0-6m', #0
-        "2": '6m+'
-    }
+    # keys = {
+    #     "1": '0-6m', #0
+    #     "2": '6m+'
+    # }
 
-    sorted_keys = sorted(map(int, keys.keys()))
-    ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
+    # sorted_keys = sorted(map(int, keys.keys()))
+    # ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
 
-    # waiting time here
-    df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
-    df.index.name = 'Cluster'
+    # # waiting time here
+    # df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
+    # df.index.name = 'Cluster'
 
-    sorted_probs = sorted(map(int, probs_dict.keys()))
-    ordered_probs = {str(key): probs_dict[str(key)] for key in sorted_probs}
+    # sorted_probs = sorted(map(int, probs_dict.keys()))
+    # ordered_probs = {str(key): probs_dict[str(key)] for key in sorted_probs}
 
-    cluster_values = [ordered_probs[str(i)] for i in range(len(ordered_probs))]
-    cluster_values = cluster_values[0]
-    df['Probability'] = cluster_values
+    # cluster_values = [ordered_probs[str(i)] for i in range(len(ordered_probs))]
+    # cluster_values = cluster_values[0]
+    # df['Probability'] = cluster_values
 
-    df['Probability'] = df['Probability'].apply(lambda x: float(x) * 100)
-    df['Probability'] = df['Probability'].apply(lambda x: format(x, '.2f') + '%')
+    # df['Probability'] = df['Probability'].apply(lambda x: float(x) * 100)
+    # df['Probability'] = df['Probability'].apply(lambda x: format(x, '.2f') + '%')
 
 
-    st.dataframe(df)
-    highlight_row(df, cluster)
+    # st.dataframe(df)
+    # highlight_row(df, cluster)
 
     with st.expander("View Input"):
         smt = query
@@ -56,52 +56,52 @@ def displayPrediction(cluster, query, probs):
 def process(query):
     Info = query
 
-    df = pd.read_csv('dummieCodex.csv')
+    # df = pd.read_csv('dummieCodex.csv')
 
-    # replace each row with its mode
-    df = modes('NAICS_CODE', df)
-    df = modes('WORKER_EDUCATION', df)
-    df = modes('PW_LEVEL', df)
-    df = modes('PW_AMOUNT', df)
-    df = modes('WORK_STATE', df)
-    df = modes('COUNTRY_OF_CITIZENSHIP', df)
-    df = modes('EMPLOYER_NUM_EMPLOYEES', df)
-    df = modes('CLASS_OF_ADMISSION', df)
-    df = modes('JOB_EDUCATION', df)
-    df = modes('EXPERIENCE', df)
-    df = modes('EXPERIENCE_MONTHS', df)
-    df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
+    # # replace each row with its mode
+    # df = modes('NAICS_CODE', df)
+    # df = modes('WORKER_EDUCATION', df)
+    # df = modes('PW_LEVEL', df)
+    # df = modes('PW_AMOUNT', df)
+    # df = modes('WORK_STATE', df)
+    # df = modes('COUNTRY_OF_CITIZENSHIP', df)
+    # df = modes('EMPLOYER_NUM_EMPLOYEES', df)
+    # df = modes('CLASS_OF_ADMISSION', df)
+    # df = modes('JOB_EDUCATION', df)
+    # df = modes('EXPERIENCE', df)
+    # df = modes('EXPERIENCE_MONTHS', df)
+    # df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
 
 
-    headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
+    # headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+    #         'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
 
-    df_query = pd.DataFrame(columns=headers)
-    df_query.loc[0] = query
+    # df_query = pd.DataFrame(columns=headers)
+    # df_query.loc[0] = query
 
-    def more(column, df_query):
-        new_col = column + '_replaced'
-        df_query[new_col] = False
+    # def more(column, df_query):
+    #     new_col = column + '_replaced'
+    #     df_query[new_col] = False
 
-        df_query[new_col] = df_query.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
-        return df_query
+    #     df_query[new_col] = df_query.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
+    #     return df_query
 
-    df_query = more('NAICS_CODE', df_query)
-    df_query = more('WORKER_EDUCATION', df_query)
-    df_query = more('PW_LEVEL', df_query)
-    df_query = more('PW_AMOUNT', df_query)
-    df_query = more('WORK_STATE', df_query)
-    df_query = more('COUNTRY_OF_CITIZENSHIP', df_query)
-    df_query = more('EMPLOYER_NUM_EMPLOYEES', df_query)
-    df_query = more('CLASS_OF_ADMISSION', df_query)
-    df_query = more('JOB_EDUCATION', df_query)
-    df_query = more('EXPERIENCE', df_query)
-    df_query = more('EXPERIENCE_MONTHS', df_query)
-    df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
+    # df_query = more('NAICS_CODE', df_query)
+    # df_query = more('WORKER_EDUCATION', df_query)
+    # df_query = more('PW_LEVEL', df_query)
+    # df_query = more('PW_AMOUNT', df_query)
+    # df_query = more('WORK_STATE', df_query)
+    # df_query = more('COUNTRY_OF_CITIZENSHIP', df_query)
+    # df_query = more('EMPLOYER_NUM_EMPLOYEES', df_query)
+    # df_query = more('CLASS_OF_ADMISSION', df_query)
+    # df_query = more('JOB_EDUCATION', df_query)
+    # df_query = more('EXPERIENCE', df_query)
+    # df_query = more('EXPERIENCE_MONTHS', df_query)
+    # df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
 
-    first_row = df_query.iloc[0].copy()
-    df.loc[0] = first_row
-    df_codex = df.reset_index(drop=True)
+    # first_row = df_query.iloc[0].copy()
+    # df.loc[0] = first_row
+    # df_codex = df.reset_index(drop=True)
     df2 = pd.read_csv("11_30_23_Pred_Data_Final1.csv")
     df2 = df2.drop(columns = ['WAITING_TIMERANGE'])
 

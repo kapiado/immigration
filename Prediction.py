@@ -172,19 +172,19 @@ def displayInput(Info):
 def interface():
     st.title("Estimate Your Green Card Application Wait Time")
     st.caption("This predictive dashboard predicts the waiting time from the date the application was received by the U.S. Department of Labor's Office of Foreign Labor Certification (OFLC) to the date a decision was made by OFLC for green card applicants.")
-    # st.text("")
-    # st.caption("*OFLC = Office of Foreign Labor Certification")
-    # if 'stage' not in st.session_state:
-    #     st.session_state.stage = 0
-    #     st.session_state.input = [] 
-    #     st.session_state.ret = []
+    st.text("")
+    st.caption("*OFLC = Office of Foreign Labor Certification")
+    if 'stage' not in st.session_state:
+        st.session_state.stage = 0
+        st.session_state.input = [] 
+        st.session_state.ret = []
 
-    # def set_stage(stage, input):
-    #     st.session_state.stage = stage
-    #     st.session_state.input = input
+    def set_stage(stage, input):
+        st.session_state.stage = stage
+        st.session_state.input = input
 
-    #     interface()
-    #     #displayInput(input)
+        interface()
+        #displayInput(input)
 
     # Some code
     with st.form(key='my_form'):

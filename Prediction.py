@@ -6,35 +6,36 @@ import streamlit as st
 import pandas as pd
 import pickle
 def displayPrediction(cluster, query, probs):
-    st.title("Prediction Results")
-    cluster = str(int(float(cluster)))
-    st.write("")
-    st.write("")
-    st.subheader("Decision Tree Classification: Cluster " + cluster)
 
-    probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
+    # st.title("Prediction Results")
+    # cluster = str(int(float(cluster)))
+    # st.write("")
+    # st.write("")
+    # st.subheader("Decision Tree Classification: Cluster " + cluster)
 
-    keys = {
-        "1": '0-9m', #0
-        "2": '9m+'
-    }
+    # probs_dict = {f"{i}": p for i, p in enumerate(probs.tolist())}
 
-    sorted_keys = sorted(map(int, keys.keys()))
-    ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
+    # keys = {
+    #     "1": '0-9m', #0
+    #     "2": '9m+'
+    # }
 
-    # waiting time here
-    df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
-    df.index.name = 'Cluster'
+    # sorted_keys = sorted(map(int, keys.keys()))
+    # ordered_dict = {str(key): keys[str(key)] for key in sorted_keys}
 
-    sorted_probs = sorted(map(int, probs_dict.keys()))
-    ordered_probs = {str(key): probs_dict[str(key)] for key in sorted_probs}
+    # # waiting time here
+    # df = pd.DataFrame.from_dict(keys, orient='index', columns=['WAITING_TIMERANGE'])
+    # df.index.name = 'Cluster'
 
-    cluster_values = [ordered_probs[str(i)] for i in range(len(ordered_probs))]
-    cluster_values = cluster_values[0]
-    df['Probability'] = cluster_values
+    # sorted_probs = sorted(map(int, probs_dict.keys()))
+    # ordered_probs = {str(key): probs_dict[str(key)] for key in sorted_probs}
 
-    df['Probability'] = df['Probability'].apply(lambda x: float(x) * 100)
-    df['Probability'] = df['Probability'].apply(lambda x: format(x, '.2f') + '%')
+    # cluster_values = [ordered_probs[str(i)] for i in range(len(ordered_probs))]
+    # cluster_values = cluster_values[0]
+    # df['Probability'] = cluster_values
+
+    # df['Probability'] = df['Probability'].apply(lambda x: float(x) * 100)
+    # df['Probability'] = df['Probability'].apply(lambda x: format(x, '.2f') + '%')
 
 
     #st.dataframe(df)
@@ -71,12 +72,13 @@ def process(query):
     user_encoded_df = df3.tail(1)
 
     st.subheader("Predicting Waiting Time")
-
     new_prediction_dt = dt_model.predict(user_encoded_df)
     new_prediction_prob_dt = dt_model.predict_proba(user_encoded_df).max()
     # Show the predicted cost range on the app
     st.write("Random Forest Prediction: {}".format(*new_prediction_dt))
     st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
+
+
 
     # Info = query
     # # df = pd.read_csv('CSV_files/dummieCodes.csv')

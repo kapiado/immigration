@@ -56,60 +56,54 @@ def displayPrediction(cluster, query, probs):
 def process(query):
     Info = query
 
-    # df = pd.read_csv('dummieCodex.csv')
+    df = pd.read_csv('dummieCodex.csv')
 
-    # # replace each row with its mode
-    # df = modes('NAICS_CODE', df)
-    # df = modes('WORKER_EDUCATION', df)
-    # df = modes('PW_LEVEL', df)
-    # df = modes('PW_AMOUNT', df)
-    # df = modes('WORK_STATE', df)
-    # df = modes('COUNTRY_OF_CITIZENSHIP', df)
-    # df = modes('EMPLOYER_NUM_EMPLOYEES', df)
-    # df = modes('CLASS_OF_ADMISSION', df)
-    # df = modes('JOB_EDUCATION', df)
-    # df = modes('EXPERIENCE', df)
-    # df = modes('EXPERIENCE_MONTHS', df)
-    # df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
+    # replace each row with its mode
+    df = modes('NAICS_CODE', df)
+    df = modes('PW_LEVEL', df)
+    df = modes('PW_AMOUNT', df)
+    df = modes('WORK_STATE', df)
+    df = modes('COUNTRY_OF_CITIZENSHIP', df)
+    df = modes('EMPLOYER_NUM_EMPLOYEES', df)
+    df = modes('CLASS_OF_ADMISSION', df)
+    df = modes('JOB_EDUCATION', df)
+    df = modes('EXPERIENCE', df)
+    df = modes('EXPERIENCE_MONTHS', df)
+    df = modes('LAYOFF_IN_PAST_SIX_MONTHS', df)
+    df = modes('WORKER_EDUCATION', df)
 
 
-    # headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-    #         'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
+    headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS''WORKER_EDUCATION']
 
-    # df_query = pd.DataFrame(columns=headers)
-    # df_query.loc[0] = query
+    df_query = pd.DataFrame(columns=headers)
+    df_query.loc[0] = query
 
-    # def more(column, df_query):
-    #     new_col = column + '_replaced'
-    #     df_query[new_col] = False
+    def more(column, df_query):
+        new_col = column + '_replaced'
+        df_query[new_col] = False
 
-    #     df_query[new_col] = df_query.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
-    #     return df_query
+        df_query[new_col] = df_query.apply(lambda row: True if pd.isna(row[column]) else False, axis = 1)
+        return df_query
+#  [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
+    df_query = more('NAICS_CODE', df_query)
+    df_query = more('PW_LEVEL', df_query)
+    df_query = more('PW_AMOUNT', df_query)
+    df_query = more('WORK_STATE', df_query)
+    df_query = more('COUNTRY_OF_CITIZENSHIP', df_query)
+    df_query = more('EMPLOYER_NUM_EMPLOYEES', df_query)
+    df_query = more('CLASS_OF_ADMISSION', df_query)
+    df_query = more('JOB_EDUCATION', df_query)
+    df_query = more('EXPERIENCE', df_query)
+    df_query = more('EXPERIENCE_MONTHS', df_query)
+    df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
+    df_query = more('WORKER_EDUCATION', df_query)
 
-    # df_query = more('NAICS_CODE', df_query)
-    # df_query = more('WORKER_EDUCATION', df_query)
-    # df_query = more('PW_LEVEL', df_query)
-    # df_query = more('PW_AMOUNT', df_query)
-    # df_query = more('WORK_STATE', df_query)
-    # df_query = more('COUNTRY_OF_CITIZENSHIP', df_query)
-    # df_query = more('EMPLOYER_NUM_EMPLOYEES', df_query)
-    # df_query = more('CLASS_OF_ADMISSION', df_query)
-    # df_query = more('JOB_EDUCATION', df_query)
-    # df_query = more('EXPERIENCE', df_query)
-    # df_query = more('EXPERIENCE_MONTHS', df_query)
-    # df_query = more('LAYOFF_IN_PAST_SIX_MONTHS', df_query)
-
-    # first_row = df_query.iloc[0].copy()
-    # df.loc[0] = first_row
-    # df_codex = df.reset_index(drop=True)
+    first_row = df_query.iloc[0].copy()
+    df.loc[0] = first_row
+    df_codex = df.reset_index(drop=True)
     df2 = pd.read_csv("11_30_23_Pred_Data_Final1.csv")
     df2 = df2.drop(columns = ['WAITING_TIMERANGE'])
-
-
-    # Loading model and mapping pickle files
-    dt_pickle = open('11_30_23_rf_model_final.sav', 'rb') 
-    dt_model = pickle.load(dt_pickle) 
-    dt_pickle.close() 
 
     df3 = df2.copy()
     df3.loc[len(df3)] = [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
@@ -118,6 +112,13 @@ def process(query):
     df3 = pd.get_dummies(df3, columns = cat_var)
     # Extract encoded user data
     user_encoded_df = df3.tail(1)
+
+    # Loading model and mapping pickle files
+    dt_pickle = open('11_30_23_rf_model_final.sav', 'rb') 
+    dt_model = pickle.load(dt_pickle) 
+    dt_pickle.close() 
+
+
 
     st.subheader("Predicting Waiting Time")
     new_prediction_dt = dt_model.predict(user_encoded_df)
@@ -148,10 +149,10 @@ def process(query):
 
 
 
-
+# [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
 def displayInput(Info):
-        headers = ['NAICS_CODE','WORKER_EDUCATION','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
-            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS']
+        headers = ['NAICS_CODE','PW_LEVEL','PW_AMOUNT','WORK_STATE','COUNTRY_OF_CITIZENSHIP','EMPLOYER_NUM_EMPLOYEES','CLASS_OF_ADMISSION',
+            'JOB_EDUCATION','EXPERIENCE','EXPERIENCE_MONTHS','LAYOFF_IN_PAST_SIX_MONTHS', 'WORKER_EDUCATION',]
     #['NAICS Code','Prevailing Wage Level','Prevailing Wage Amount','Work State','Country of Citizenship','Employer Number of Employees','Class of Admission','Job Education','Experience','Months of Experience','Layoff in Past Six Months','Education']
         #query = [Info[0], Info[1], Info[6], Info[7], Info[3], Info[8], Info[9], Info[2], Info[5], Info[10], Info[4]]
 

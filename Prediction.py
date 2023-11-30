@@ -286,29 +286,7 @@ def interface():
     
         submit = st.form_submit_button('Submit', args=(1,
                         [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]))
-df2 = pd.read_csv("11_30_23_Pred_Data_Final1.csv")
-df2 = df2.drop(columns = ['WAITING_TIMERANGE'])
 
-df3 = df2.copy()
-df3.loc[len(df3)] = [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
-# Create dummies for encode_df
-cat_var = ['NAICS_CODE', 'PW_LEVEL','WORK_STATE','COUNTRY_OF_CITIZENSHIP','CLASS_OF_ADMISSION','JOB_EDUCATION','EXPERIENCE','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
-df3 = pd.get_dummies(df3, columns = cat_var)
-# Extract encoded user data
-user_encoded_df = df3.tail(1)
-
-# Loading model and mapping pickle files
-dt_pickle = open('11_30_23_rf_model_final.sav', 'rb') 
-dt_model = pickle.load(dt_pickle) 
-dt_pickle.close() 
-
-st.subheader("Predicting Waiting Time")
-new_prediction_dt = dt_model.predict(user_encoded_df)
-cluster = new_prediction_df[0]
-new_prediction_prob_dt = dt_model.predict_proba(user_encoded_df).max()
-# Show the predicted cost range on the app
-st.write("Random Forest Prediction: {}".format(*new_prediction_dt))
-st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
     #if st.session_state.stage > 0 and st.session_state.input != ['15-17', '0 to 8', 'Full time', 'Male', 'AL', 'Homeless', 'Mexican', 'Native', 'Never married', 'Yes', 1]:
 
     if st.session_state.stage > 0:
@@ -328,9 +306,33 @@ st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
         st.button('View Prediction', on_click=executeQuery(smt), args=(st.session_state.input, ))
 
     # def executeQuery(Info)
-    def executeQuery(query):
+    def executeQuery(Info):
         query = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
         #st.text('Thank you!')
+        df2 = pd.read_csv("11_30_23_Pred_Data_Final1.csv")
+        df2 = df2.drop(columns = ['WAITING_TIMERANGE'])
+        
+        df3 = df2.copy()
+        df3.loc[len(df3)] = [Info[0], Info[2], Info[3], Info[6], Info[5], Info[7], Info[4], Info[8], Info[9], Info[10], Info[11], Info[1]]
+        #df3.loc[len(df3)] = [codeInfo, wagelevelInfo, wageamountInfo, stateInfo, countryInfo, employeenumInfo,  admiclassInfo,  jobeducationInfo, expInfo, expmonthsInfo, layoffInfo, educationInfo]
+        # Create dummies for encode_df
+        cat_var = ['NAICS_CODE', 'PW_LEVEL','WORK_STATE','COUNTRY_OF_CITIZENSHIP','CLASS_OF_ADMISSION','JOB_EDUCATION','EXPERIENCE','LAYOFF_IN_PAST_SIX_MONTHS','WORKER_EDUCATION']
+        df3 = pd.get_dummies(df3, columns = cat_var)
+        # Extract encoded user data
+        user_encoded_df = df3.tail(1)
+        
+        # Loading model and mapping pickle files
+        dt_pickle = open('11_30_23_rf_model_final.sav', 'rb') 
+        dt_model = pickle.load(dt_pickle) 
+        dt_pickle.close() 
+        
+        st.subheader("Predicting Waiting Time")
+        new_prediction_dt = dt_model.predict(user_encoded_df)
+        cluster = new_prediction_df[0]
+        new_prediction_prob_dt = dt_model.predict_proba(user_encoded_df).max()
+        # Show the predicted cost range on the app
+        st.write("Random Forest Prediction: {}".format(*new_prediction_dt))
+        st.write("Prediction Probability: {:.0%}".format(new_prediction_prob_dt))
  
     
         #process(query)
